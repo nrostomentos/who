@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой путь в изучении HTML | Курс НаДиП</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            background: white;
+            padding: 40px 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #764ba2;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #667eea;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .journey-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #764ba2;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 40px auto;
+        }
+
+        .timeline-item {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #667eea;
+            border-radius: 0 10px 10px 0;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background: #764ba2;
+            border-radius: 50%;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .skill-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #667eea;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .project-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #764ba2;
+        }
+
+        .motivation {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: background 0.3s ease;
+            margin: 10px;
+        }
+        .btn:hover {
+            background: #764ba2;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Мой путь в изучении HTML</h1>
+            <p class="subtitle">Курс от НаДиП - от новичка до создателя веб-страниц</p>
+            <p>Этот сайт создан c использованием моих знаний в этом!!!</p>
+        </header>
+
+        <section class="journey-section">
+            <h2>📚 Начало...</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>Основы HTML</h3>
+                    <p>Познакомилась с тегами, структурой документа, научилась создавать простые страницы</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Работа с текстом и ссылками</h3>
+                    <p>Освоила форматирование текста, создание списков и работа с гиперссылками☠</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Изображения и таблицы</h3>
+                    <p>Научилась добавлять изображения, создавать таблицы и формы</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Семантическая верстка</h3>
+                    <p>Познакомилась с современными тегами: header, footer, section, article и др.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="journey-section">
+            <h2>💪 Приобретенные навыки</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>Структура HTML</h3>
+                    <p>Правильное использование тегов и создание семантической разметки</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Формы и инпуты</h3>
+                    <p>Создание интерактивных форм с различными типами полей</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Мультимедиа</h3>
+                    <p>Работа с изображениями, видео и аудио контентом</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Доступность</h3>
+                    <p>Создание сайтов, понятных для всех пользователей</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="journey-section">
+            <h2>🚀 Мои проекты</h2>
+            <div class="projects">
+                <div class="добавлю чуть позже...">
+            </div>
+        </section>
+
+        <section class="journey-section motivation">
+            <h2>✨ Мотивация</h2>
+            <p>"Курс НаДиП открыл для меня мир веб-разработки. Теперь я могу создавать красивые и функциональные веб-страницы, и это только начало моего пути!"</p>
+            <p><strong>Спасибо за курс!</strong></p>
+        </section>
+
+        <footer>
+            <p>Создано с любовью и использованием HTML & CSS</p>
+            <p>© 2026 Выпускница курса НаДиП</p>
+            <div>
+                <a href="https://github.com/nrostomentos" class="btn">На GitHub</a>
+                <a href="https://t.me/swn_f" class="btn">Связаться со мной</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
