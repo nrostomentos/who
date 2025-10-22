@@ -1,246 +1,585 @@
-
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мой путь в изучении HTML | Курс НаДиП</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Мой путь в изучении HTML | Курс НаДиП</title>
+	<style>
+		:root {
+			--deep-brown: #3D2B1F;
+			--dark-chocolate: #2C1810;
+			--charcoal: #1A120B;
+			--mahogany: #4A2C2A;
+			--bronze: #8C7853;
+			--dark-gold: #B8860B;
+			--cream: #F5F5DC;
+			--text-dark: #E8E8E8;
+			--text-light: #1A120B;
+			--bg-light: #2C1810;
+			--bg-dark: #1A120B;
+			--card-light: #3D2B1F;
+			--card-dark: #2C1810;
+			--shadow: rgba(26, 18, 11, 0.8);
+		}
 
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
-            min-height: 100vh;
-        }
+		[data-theme="dark"] {
+			--bg-color: var(--bg-dark);
+			--text-color: var(--text-dark);
+			--card-bg: var(--card-dark);
+			--header-bg: var(--charcoal);
+			--border-color: var(--mahogany);
+			--accent-color: var(--dark-gold);
+			--hover-color: var(--bronze);
+		}
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+		[data-theme="light"] {
+			--bg-color: var(--bg-light);
+			--text-color: var(--text-light);
+			--card-bg: var(--card-light);
+			--header-bg: var(--deep-brown);
+			--border-color: var(--mahogany);
+			--accent-color: var(--bronze);
+			--hover-color: var(--dark-gold);
+		}
 
-        header {
-            text-align: center;
-            background: white;
-            padding: 40px 20px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+		}
 
-        h1 {
-            color: #764ba2;
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
+		body {
+			font-family: 'Georgia', serif;
+			line-height: 1.6;
+			background: var(--bg-color);
+			color: var(--text-color);
+			min-height: 100vh;
+			background-image:
+				radial-gradient(circle at 10% 20%, rgba(61, 43, 31, 0.3) 0%, transparent 20%),
+				radial-gradient(circle at 90% 80%, rgba(44, 24, 16, 0.3) 0%, transparent 20%);
+		}
 
-        .subtitle {
-            color: #667eea;
-            font-size: 1.2em;
-            margin-bottom: 20px;
-        }
+		.theme-toggle {
+			position: fixed;
+			top: 20px;
+			right: 20px;
+			background: var(--header-bg);
+			color: var(--accent-color);
+			border: 2px solid var(--accent-color);
+			border-radius: 50%;
+			width: 50px;
+			height: 50px;
+			cursor: pointer;
+			font-size: 1.2em;
+			z-index: 1000;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			box-shadow: 0 4px 15px var(--shadow);
+			transition: all 0.3s ease;
+		}
 
-        .journey-section {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
+		.theme-toggle:hover {
+			transform: scale(1.1);
+			background: var(--accent-color);
+			color: var(--header-bg);
+		}
 
-        h2 {
-            color: #764ba2;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
+		.container {
+			max-width: 1200px;
+			margin: 0 auto;
+			padding: 20px;
+		}
 
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 40px auto;
-        }
+		header {
+			text-align: center;
+			background: var(--header-bg);
+			color: var(--text-color);
+			padding: 60px 20px;
+			border-radius: 15px;
+			box-shadow: 0 10px 30px var(--shadow);
+			margin-bottom: 40px;
+			position: relative;
+			overflow: hidden;
+			border: 2px solid var(--border-color);
+		}
 
-        .timeline-item {
-            background: #f8f9fa;
-            padding: 20px;
-            margin: 20px 0;
-            border-left: 5px solid #667eea;
-            border-radius: 0 10px 10px 0;
-            position: relative;
-        }
+		header::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: linear-gradient(45deg, transparent 30%, rgba(184, 134, 11, 0.1) 100%);
+			pointer-events: none;
+		}
 
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -10px;
-            top: 20px;
-            width: 20px;
-            height: 20px;
-            background: #764ba2;
-            border-radius: 50%;
-        }
+		h1 {
+			color: var(--accent-color);
+			font-size: 3em;
+			margin-bottom: 15px;
+			text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+			font-weight: bold;
+		}
 
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
+		.subtitle {
+			color: var(--text-color);
+			font-size: 1.3em;
+			margin-bottom: 20px;
+			font-style: italic;
+			opacity: 0.9;
+		}
 
-        .skill-card {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            border: 2px solid #667eea;
-            transition: transform 0.3s ease;
-        }
+		.journey-section {
+			background: var(--card-bg);
+			padding: 40px;
+			border-radius: 15px;
+			box-shadow: 0 8px 25px var(--shadow);
+			margin-bottom: 40px;
+			border: 2px solid var(--border-color);
+			position: relative;
+		}
 
-        .skill-card:hover {
-            transform: translateY(-5px);
-        }
+		.journey-section::before {
+			content: '';
+			position: absolute;
+			top: 5px;
+			left: 5px;
+			right: 5px;
+			bottom: 5px;
+			border: 1px solid var(--accent-color);
+			border-radius: 12px;
+			pointer-events: none;
+			opacity: 0.2;
+		}
 
-        .projects {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
+		h2 {
+			color: var(--accent-color);
+			border-bottom: 3px solid var(--border-color);
+			padding-bottom: 15px;
+			margin-bottom: 30px;
+			font-size: 2.2em;
+			text-align: center;
+			text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+		}
 
-        .project-card {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            border: 2px solid #764ba2;
-        }
+		.timeline {
+			position: relative;
+			max-width: 900px;
+			margin: 50px auto;
+		}
 
-        .motivation {
-            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
-            color: white;
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-        }
+		.timeline::before {
+			content: '';
+			position: absolute;
+			left: 50%;
+			top: 0;
+			bottom: 0;
+			width: 3px;
+			background: linear-gradient(to bottom, var(--accent-color), var(--hover-color));
+			transform: translateX(-50%);
+		}
 
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
+		.timeline-item {
+			background: var(--card-bg);
+			padding: 25px;
+			margin: 30px 0;
+			border: 2px solid var(--border-color);
+			border-radius: 12px;
+			position: relative;
+			width: 45%;
+			box-shadow: 0 5px 20px var(--shadow);
+			transition: all 0.3s ease;
+		}
 
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background: #667eea;
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            transition: background 0.3s ease;
-            margin: 10px;
-        }
-        .btn:hover {
-            background: #764ba2;
-        }
+		.timeline-item:hover {
+			transform: translateX(5px);
+			border-color: var(--accent-color);
+			box-shadow: 0 8px 25px var(--shadow);
+		}
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-            
-            h1 {
-                font-size: 2em;
-            }
-            
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+		.timeline-item:nth-child(odd) {
+			left: 0;
+		}
+
+		.timeline-item:nth-child(even) {
+			left: 55%;
+		}
+
+		.timeline-item::before {
+			content: '';
+			position: absolute;
+			top: 25px;
+			width: 16px;
+			height: 16px;
+			background: var(--accent-color);
+			border-radius: 50%;
+			border: 3px solid var(--card-bg);
+			box-shadow: 0 0 10px var(--accent-color);
+		}
+
+		.timeline-item:nth-child(odd)::before {
+			right: -48px;
+		}
+
+		.timeline-item:nth-child(even)::before {
+			left: -48px;
+		}
+
+		.timeline-item h3 {
+			color: var(--accent-color);
+			margin-bottom: 10px;
+			font-size: 1.4em;
+		}
+
+		.timeline-item p {
+			opacity: 0.9;
+			line-height: 1.7;
+		}
+
+		.skills-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+			gap: 25px;
+			margin-top: 30px;
+		}
+
+		.skill-card {
+			background: var(--card-bg);
+			padding: 25px;
+			border-radius: 12px;
+			text-align: center;
+			border: 2px solid var(--border-color);
+			transition: all 0.3s ease;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.skill-card::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: -100%;
+			width: 100%;
+			height: 100%;
+			background: linear-gradient(90deg, transparent, rgba(184, 134, 11, 0.1), transparent);
+			transition: left 0.5s;
+		}
+
+		.skill-card:hover::before {
+			left: 100%;
+		}
+
+		.skill-card:hover {
+			transform: translateY(-8px);
+			box-shadow: 0 12px 30px var(--shadow);
+			border-color: var(--accent-color);
+		}
+
+		.skill-card h3 {
+			color: var(--accent-color);
+			margin-bottom: 15px;
+			font-size: 1.3em;
+		}
+
+		.projects {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+			gap: 25px;
+			margin-top: 30px;
+		}
+
+		.project-card {
+			background: var(--card-bg);
+			padding: 25px;
+			border-radius: 12px;
+			border: 2px solid var(--border-color);
+			transition: all 0.3s ease;
+		}
+
+		.project-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 8px 25px var(--shadow);
+			border-color: var(--accent-color);
+		}
+
+		.motivation {
+			background: linear-gradient(135deg, var(--charcoal), var(--deep-brown));
+			color: var(--text-color);
+			padding: 50px 40px;
+			border-radius: 15px;
+			text-align: center;
+			border: 2px solid var(--accent-color);
+			position: relative;
+			overflow: hidden;
+		}
+
+		.motivation::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="stars" x="0" y="0" width="25" height="25" patternUnits="userSpaceOnUse"><circle cx="8" cy="8" r="1" fill="%23B8860B" opacity="0.4"/><circle cx="20" cy="15" r="0.7" fill="%23B8860B" opacity="0.4"/><circle cx="12" cy="22" r="0.5" fill="%23B8860B" opacity="0.4"/></pattern></defs><rect width="100" height="100" fill="url(%23stars)"/></svg>');
+			animation: float 25s infinite linear;
+			opacity: 0.3;
+		}
+
+		@keyframes float {
+			0% {
+				transform: translateY(0) translateX(0);
+			}
+
+			50% {
+				transform: translateY(-15px) translateX(15px);
+			}
+
+			100% {
+				transform: translateY(0) translateX(0);
+			}
+		}
+
+		.motivation h2 {
+			color: var(--accent-color);
+			border-bottom-color: var(--accent-color);
+			position: relative;
+		}
+
+		.motivation p {
+			font-size: 1.2em;
+			margin-bottom: 20px;
+			position: relative;
+			line-height: 1.8;
+			opacity: 0.9;
+		}
+
+		footer {
+			text-align: center;
+			margin-top: 50px;
+			padding: 40px 20px;
+			background: var(--header-bg);
+			color: var(--text-color);
+			border-radius: 15px;
+			box-shadow: 0 10px 30px var(--shadow);
+			border: 2px solid var(--border-color);
+		}
+
+		.btn {
+			display: inline-block;
+			padding: 15px 35px;
+			background: var(--accent-color);
+			color: var(--text-light);
+			text-decoration: none;
+			border-radius: 30px;
+			transition: all 0.3s ease;
+			margin: 10px;
+			border: 2px solid transparent;
+			font-weight: bold;
+			box-shadow: 0 4px 15px var(--shadow);
+		}
+
+		.btn:hover {
+			background: transparent;
+			border-color: var(--accent-color);
+			color: var(--accent-color);
+			transform: translateY(-3px);
+			box-shadow: 0 8px 25px var(--shadow);
+		}
+
+		/* Стили для ссылок */
+		a {
+			color: #ff69b4;
+			text-decoration: none;
+			transition: all 0.3s ease;
+			padding: 2px 6px;
+			border-radius: 4px;
+		}
+
+		a:hover {
+			background-color: #ff69b4;
+			color: var(--charcoal);
+			box-shadow: 0 0 15px rgba(255, 105, 180, 0.6);
+			transform: translateY(-2px);
+		}
+
+		a:visited {
+			color: #d94d9b;
+		}
+
+		a:focus {
+			outline: 2px solid #ff69b4;
+			outline-offset: 2px;
+		}
+
+		@media (max-width: 768px) {
+			.container {
+				padding: 15px;
+			}
+
+			h1 {
+				font-size: 2.2em;
+			}
+
+			.timeline::before {
+				left: 20px;
+			}
+
+			.timeline-item {
+				width: calc(100% - 50px);
+				left: 50px !important;
+			}
+
+			.timeline-item::before {
+				left: -40px !important;
+			}
+
+			.skills-grid {
+				grid-template-columns: 1fr;
+			}
+
+			.theme-toggle {
+				top: 10px;
+				right: 10px;
+				width: 45px;
+				height: 45px;
+			}
+		}
+
+		@media (max-width: 480px) {
+			h1 {
+				font-size: 1.8em;
+			}
+
+			h2 {
+				font-size: 1.6em;
+			}
+
+			.journey-section {
+				padding: 25px 20px;
+			}
+
+			.btn {
+				padding: 12px 25px;
+				margin: 5px;
+				display: block;
+			}
+		}
+	</style>
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>Мой путь в изучении HTML</h1>
-            <p class="subtitle">Курс от НаДиП - от новичка до создателя веб-страниц</p>
-            <p>Этот сайт создан c использованием моих знаний в этом!!!</p>
-        </header>
 
-        <section class="journey-section">
-            <h2>📚 Начало...</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <h3>Основы HTML</h3>
-                    <p>Познакомилась с тегами, структурой документа, научилась создавать простые страницы</p>
-                </div>
-                <div class="timeline-item">
-                    <h3>Работа с текстом и ссылками</h3>
-                    <p>Освоила форматирование текста, создание списков и работа с гиперссылками☠</p>
-                </div>
-                <div class="timeline-item">
-                    <h3>Изображения и таблицы</h3>
-                    <p>Научилась добавлять изображения, создавать таблицы и формы</p>
-                </div>
-                <div class="timeline-item">
-                    <h3>Семантическая верстка</h3>
-                    <p>Познакомилась с современными тегами: header, footer, section, article и др.</p>
-                </div>
-            </div>
-        </section>
+<body data-theme="dark">
+	<button class="theme-toggle" onclick="toggleTheme()">🌙</button>
 
-        <section class="journey-section">
-            <h2>💪 Приобретенные навыки</h2>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <h3>Структура HTML</h3>
-                    <p>Правильное использование тегов и создание семантической разметки</p>
-                </div>
-                <div class="skill-card">
-                    <h3>Формы и инпуты</h3>
-                    <p>Создание интерактивных форм с различными типами полей</p>
-                </div>
-                <div class="skill-card">
-                    <h3>Мультимедиа</h3>
-                    <p>Работа с изображениями, видео и аудио контентом</p>
-                </div>
-                <div class="skill-card">
-                    <h3>Доступность</h3>
-                    <p>Создание сайтов, понятных для всех пользователей</p>
-                </div>
-            </div>
-        </section>
+	<div class="container">
+		<header>
+			<h1>Мой путь в изучении HTML</h1>
+			<p class="subtitle">Курс от НаДиП - от новичка до создателя веб-страниц</p>
+			<p>Этот сайт создан c использованием моих знаний в этом!!!</p>
+		</header>
 
-        <section class="journey-section">
-            <h2>🚀 Мои проекты</h2>
-            <div class="projects">
-                <div class="добавлю чуть позже...">
-            </div>
-        </section>
+		<section class="journey-section">
+			<h2>📚 Начало...</h2>
+			<div class="timeline">
+				<div class="timeline-item">
+					<h3>Основы HTML</h3>
+					<p>Познакомилась с тегами, структурой документа, научилась создавать простые страницы</p>
+				</div>
+				<div class="timeline-item">
+					<h3>Работа с текстом и ссылками</h3>
+					<p>Освоила форматирование текста, создание списков и работа с гиперссылками☠</p>
+				</div>
+				<div class="timeline-item">
+					<h3>Изображения и таблицы</h3>
+					<p>Научилась добавлять изображения, создавать таблицы и формы</p>
+				</div>
+				<div class="timeline-item">
+					<h3>Семантическая верстка</h3>
+					<p>Познакомилась с современными тегами: header, footer, section, article и др.</p>
+				</div>
+			</div>
+		</section>
 
-        <section class="journey-section motivation">
-            <h2>✨ Мотивация</h2>
-            <p>"Курс НаДиП открыл для меня мир веб-разработки. Теперь я могу создавать красивые и функциональные веб-страницы, и это только начало моего пути!"</p>
-            <p><strong>Спасибо за курс!</strong></p>
-        </section>
+		<section class="journey-section">
+			<h2>💪 Приобретенные навыки</h2>
+			<div class="skills-grid">
+				<div class="skill-card">
+					<h3>Структура HTML</h3>
+					<p>Правильное использование тегов и создание семантической разметки</p>
+				</div>
+				<div class="skill-card">
+					<h3>Формы и инпуты</h3>
+					<p>Создание интерактивных форм с различными типами полей</p>
+				</div>
+				<div class="skill-card">
+					<h3>Мультимедиа</h3>
+					<p>Работа с изображениями, видео и аудио контентом</p>
+				</div>
+				<div class="skill-card">
+					<h3>Доступность</h3>
+					<p>Создание сайтов, понятных для всех пользователей</p>
+				</div>
+			</div>
+		</section>
 
-        <footer>
-            <p>Создано с любовью и использованием HTML & CSS</p>
-            <p>© 2026 Выпускница курса НаДиП</p>
-            <div>
-                <a href="https://github.com/nrostomentos" class="btn">На GitHub</a>
-                <a href="https://t.me/swn_f" class="btn">Связаться со мной</a>
-            </div>
-        </footer>
-    </div>
+		<section class="journey-section">
+			<h2>🚀 Мои проекты</h2>
+			<div class="projects">
+				<div class="project-card">
+					<h3><a href="https://nrostomentos.github.io/workgoo/"class="btn">квест</a></h3>
+          <h3><a href="https://nrostomentos.github.io/anpractic/"class="btn">мопсы</a></h3>
+		<h3><a href="https://nrostomentos.github.io/tfff/"class="btn">шрифты</a></h3>
+				</div>
+			</div>
+		</section>
+
+		<section class="journey-section motivation">
+			<h2>✨ Мотивация</h2>
+			<p>"Курс НаДиП открыл для меня мир веб-разработки. Теперь я могу создавать красивые и функциональные
+				веб-страницы, и это только начало моего пути!"</p>
+			<p><strong>Спасибо за курс!</strong></p>
+		</section>
+
+		<footer>
+			<p>Создано с любовью и использованием HTML & CSS</p>
+			<p>© 2026 Выпускница курса НаДиП</p>
+			<div>
+				<a href="https://github.com/nrostomentos" class="btn">На GitHub</a>
+				<a href="https://t.me/swn_f" class="btn">Связаться со мной</a>
+			</div>
+		</footer>
+	</div>
+
+	<script>
+		function toggleTheme() {
+            const body = document.body;
+            const themeToggle = document.querySelector('.theme-toggle');
+            const currentTheme = body.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                body.setAttribute('data-theme', 'light');
+                themeToggle.textContent = '☀️';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeToggle.textContent = '🌙';
+            }
+            
+            // Сохраняем выбор темы в localStorage
+            localStorage.setItem('theme', body.getAttribute('data-theme'));
+        }
+
+        // Загружаем сохраненную тему при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.body.setAttribute('data-theme', savedTheme);
+            
+            const themeToggle = document.querySelector('.theme-toggle');
+            themeToggle.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+        });
+	</script>
 </body>
+
 </html>
