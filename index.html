@@ -7,40 +7,32 @@
 	<title>Мой путь в изучении HTML | Курс НаДиП</title>
 	<style>
 		:root {
-			--deep-brown: #3D2B1F;
-			--dark-chocolate: #2C1810;
-			--charcoal: #1A120B;
-			--mahogany: #4A2C2A;
-			--bronze: #8C7853;
-			--dark-gold: #B8860B;
-			--cream: #F5F5DC;
-			--text-dark: #E8E8E8;
-			--text-light: #1A120B;
-			--bg-light: #2C1810;
-			--bg-dark: #1A120B;
-			--card-light: #3D2B1F;
-			--card-dark: #2C1810;
-			--shadow: rgba(26, 18, 11, 0.8);
+			--yellow: #FFFF00;
+			--black: #000000;
+			--dark-yellow: #CCCC00;
+			--light-yellow: #FFFF99;
 		}
 
 		[data-theme="dark"] {
-			--bg-color: var(--bg-dark);
-			--text-color: var(--text-dark);
-			--card-bg: var(--card-dark);
-			--header-bg: var(--charcoal);
-			--border-color: var(--mahogany);
-			--accent-color: var(--dark-gold);
-			--hover-color: var(--bronze);
+			--bg-color: var(--black);
+			--text-color: var(--yellow);
+			--card-bg: var(--black);
+			--header-bg: var(--black);
+			--border-color: var(--yellow);
+			--accent-color: var(--yellow);
+			--hover-color: var(--dark-yellow);
+			--shadow: rgba(255, 255, 0, 0.3);
 		}
 
 		[data-theme="light"] {
-			--bg-color: var(--bg-light);
-			--text-color: var(--text-light);
-			--card-bg: var(--card-light);
-			--header-bg: var(--deep-brown);
-			--border-color: var(--mahogany);
-			--accent-color: var(--bronze);
-			--hover-color: var(--dark-gold);
+			--bg-color: var(--yellow);
+			--text-color: var(--black);
+			--card-bg: var(--yellow);
+			--header-bg: var(--yellow);
+			--border-color: var(--black);
+			--accent-color: var(--black);
+			--hover-color: var(--black);
+			--shadow: rgba(0, 0, 0, 0.3);
 		}
 
 		* {
@@ -56,9 +48,6 @@
 			background: var(--bg-color);
 			color: var(--text-color);
 			min-height: 100vh;
-			background-image:
-				radial-gradient(circle at 10% 20%, rgba(61, 43, 31, 0.3) 0%, transparent 20%),
-				radial-gradient(circle at 90% 80%, rgba(44, 24, 16, 0.3) 0%, transparent 20%);
 		}
 
 		.theme-toggle {
@@ -106,22 +95,11 @@
 			border: 2px solid var(--border-color);
 		}
 
-		header::before {
-			content: '';
-			position: absolute;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			background: linear-gradient(45deg, transparent 30%, rgba(184, 134, 11, 0.1) 100%);
-			pointer-events: none;
-		}
-
 		h1 {
 			color: var(--accent-color);
 			font-size: 3em;
 			margin-bottom: 15px;
-			text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+			text-shadow: 2px 2px 8px var(--shadow);
 			font-weight: bold;
 		}
 
@@ -143,19 +121,6 @@
 			position: relative;
 		}
 
-		.journey-section::before {
-			content: '';
-			position: absolute;
-			top: 5px;
-			left: 5px;
-			right: 5px;
-			bottom: 5px;
-			border: 1px solid var(--accent-color);
-			border-radius: 12px;
-			pointer-events: none;
-			opacity: 0.2;
-		}
-
 		h2 {
 			color: var(--accent-color);
 			border-bottom: 3px solid var(--border-color);
@@ -163,7 +128,7 @@
 			margin-bottom: 30px;
 			font-size: 2.2em;
 			text-align: center;
-			text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+			text-shadow: 1px 1px 4px var(--shadow);
 		}
 
 		.timeline {
@@ -179,7 +144,7 @@
 			top: 0;
 			bottom: 0;
 			width: 3px;
-			background: linear-gradient(to bottom, var(--accent-color), var(--hover-color));
+			background: var(--accent-color);
 			transform: translateX(-50%);
 		}
 
@@ -254,23 +219,6 @@
 			text-align: center;
 			border: 2px solid var(--border-color);
 			transition: all 0.3s ease;
-			position: relative;
-			overflow: hidden;
-		}
-
-		.skill-card::before {
-			content: '';
-			position: absolute;
-			top: 0;
-			left: -100%;
-			width: 100%;
-			height: 100%;
-			background: linear-gradient(90deg, transparent, rgba(184, 134, 11, 0.1), transparent);
-			transition: left 0.5s;
-		}
-
-		.skill-card:hover::before {
-			left: 100%;
 		}
 
 		.skill-card:hover {
@@ -307,7 +255,7 @@
 		}
 
 		.motivation {
-			background: linear-gradient(135deg, var(--charcoal), var(--deep-brown));
+			background: var(--card-bg);
 			color: var(--text-color);
 			padding: 50px 40px;
 			border-radius: 15px;
@@ -315,32 +263,6 @@
 			border: 2px solid var(--accent-color);
 			position: relative;
 			overflow: hidden;
-		}
-
-		.motivation::before {
-			content: '';
-			position: absolute;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="stars" x="0" y="0" width="25" height="25" patternUnits="userSpaceOnUse"><circle cx="8" cy="8" r="1" fill="%23B8860B" opacity="0.4"/><circle cx="20" cy="15" r="0.7" fill="%23B8860B" opacity="0.4"/><circle cx="12" cy="22" r="0.5" fill="%23B8860B" opacity="0.4"/></pattern></defs><rect width="100" height="100" fill="url(%23stars)"/></svg>');
-			animation: float 25s infinite linear;
-			opacity: 0.3;
-		}
-
-		@keyframes float {
-			0% {
-				transform: translateY(0) translateX(0);
-			}
-
-			50% {
-				transform: translateY(-15px) translateX(15px);
-			}
-
-			100% {
-				transform: translateY(0) translateX(0);
-			}
 		}
 
 		.motivation h2 {
@@ -372,7 +294,7 @@
 			display: inline-block;
 			padding: 15px 35px;
 			background: var(--accent-color);
-			color: var(--text-light);
+			color: var(--bg-color);
 			text-decoration: none;
 			border-radius: 30px;
 			transition: all 0.3s ease;
@@ -392,7 +314,7 @@
 
 		/* Стили для ссылок */
 		a {
-			color: #ff69b4;
+			color: var(--accent-color);
 			text-decoration: none;
 			transition: all 0.3s ease;
 			padding: 2px 6px;
@@ -400,19 +322,10 @@
 		}
 
 		a:hover {
-			background-color: #ff69b4;
-			color: var(--charcoal);
-			box-shadow: 0 0 15px rgba(255, 105, 180, 0.6);
+			background-color: var(--accent-color);
+			color: var(--bg-color);
+			box-shadow: 0 0 15px var(--shadow);
 			transform: translateY(-2px);
-		}
-
-		a:visited {
-			color: #d94d9b;
-		}
-
-		a:focus {
-			outline: 2px solid #ff69b4;
-			outline-offset: 2px;
 		}
 
 		@media (max-width: 768px) {
