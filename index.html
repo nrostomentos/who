@@ -310,7 +310,36 @@
             <!-- чуть ниже мелким шрифтом "полностью прошла курс от НАДиП" -->
             <div class="header-sub">📘 полностью прошла курс от НАДиП</div>
         </div>
+<style>
+    /* ... все остальные стили, которые уже есть ... */
 
+    /* Добавить этот блок в конец тега <style>, перед закрывающим </style> */
+    .app-link {
+        display: inline-block;
+        border: 2px solid var(--border-color);
+        background: var(--bg-color);
+        padding: 10px 24px;
+        border-radius: 60px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        backdrop-filter: blur(2px);
+        transition: all 0.2s;
+        color: var(--accent-main);
+        box-shadow: 0 2px 6px var(--shadow);
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .app-link:hover {
+        transform: translateY(-3px);
+        background: var(--accent-main);
+        color: white;
+        border-color: white;
+        text-decoration: none;
+    }
+</style>
         <!-- 2. Названия приложений/сайтов в рамках, на английском -->
         <!-- 2. Названия приложений/сайтов в рамках, на английском, с ссылками -->
 <div class="frame-block apps-section">
