@@ -1,504 +1,400 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="ru">
-
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Итоговая работа</title>
-	<style>
-		:root {
-			--light-bg: #ffffff;
-			--light-card: #8ed1f6;
-			--dark-bg: #0095bc;
-			--dark-card: #014e71;
-			--white: #ffffff;
-			--black: #000000;
-			--medium-blue: #3399ff;
-			--accent-light: #0077cc;
-			--accent-dark: #00b7ff;
-		}
-
-		[data-theme="dark"] {
-			--bg-color: var(--dark-bg);
-			--text-color: var(--white);
-			--card-bg: var(--dark-card);
-			--header-bg: var(--dark-card);
-			--border-color: var(--accent-dark);
-			--accent-color: var(--accent-dark);
-			--hover-color: #00d9ff;
-			--shadow: rgba(0, 149, 188, 0.3);
-		}
-
-		[data-theme="light"] {
-			--bg-color: var(--light-bg);
-			--text-color: var(--black);
-			--card-bg: var(--light-card);
-			--header-bg: var(--light-card);
-			--border-color: var(--accent-light);
-			--accent-color: var(--accent-light);
-			--hover-color: #005fa3;
-			--shadow: rgba(0, 119, 204, 0.2);
-		}
-
-		* {
-			margin: 0;
-			padding: 0;
-			box-sizing: border-box;
-			transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-		}
-
-		body {
-			font-family: 'Georgia', serif;
-			line-height: 1.6;
-			background: var(--bg-color);
-			color: var(--text-color);
-			min-height: 100vh;
-		}
-
-		.theme-toggle {
-			position: fixed;
-			top: 20px;
-			right: 20px;
-			background: var(--accent-color);
-			color: var(--white);
-			border: 2px solid var(--accent-color);
-			border-radius: 50%;
-			width: 50px;
-			height: 50px;
-			cursor: pointer;
-			font-size: 1.2em;
-			z-index: 1000;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			box-shadow: 0 4px 15px var(--shadow);
-			transition: all 0.3s ease;
-		}
-
-		.theme-toggle:hover {
-			transform: scale(1.1);
-			background: var(--hover-color);
-			border-color: var(--hover-color);
-		}
-
-		.container {
-			max-width: 1200px;
-			margin: 0 auto;
-			padding: 20px;
-		}
-
-		header {
-			text-align: center;
-			background: var(--header-bg);
-			color: var(--text-color);
-			padding: 60px 20px;
-			border-radius: 15px;
-			box-shadow: 0 10px 30px var(--shadow);
-			margin-bottom: 40px;
-			position: relative;
-			overflow: hidden;
-			border: 2px solid var(--border-color);
-		}
-
-		h1 {
-			color: var(--accent-color);
-			font-size: 3em;
-			margin-bottom: 15px;
-			text-shadow: 2px 2px 8px var(--shadow);
-			font-weight: bold;
-		}
-
-		.subtitle {
-			color: var(--text-color);
-			font-size: 1.3em;
-			margin-bottom: 20px;
-			font-style: italic;
-			opacity: 0.9;
-		}
-
-		.journey-section {
-			background: var(--card-bg);
-			padding: 40px;
-			border-radius: 15px;
-			box-shadow: 0 8px 25px var(--shadow);
-			margin-bottom: 40px;
-			border: 2px solid var(--border-color);
-			position: relative;
-		}
-
-		h2 {
-			color: var(--accent-color);
-			border-bottom: 3px solid var(--border-color);
-			padding-bottom: 15px;
-			margin-bottom: 30px;
-			font-size: 2.2em;
-			text-align: center;
-			text-shadow: 1px 1px 4px var(--shadow);
-		}
-
-		.timeline {
-			position: relative;
-			max-width: 900px;
-			margin: 50px auto;
-		}
-
-		.timeline::before {
-			content: '';
-			position: absolute;
-			left: 50%;
-			top: 0;
-			bottom: 0;
-			width: 3px;
-			background: var(--accent-color);
-			transform: translateX(-50%);
-		}
-
-		.timeline-item {
-			background: var(--card-bg);
-			padding: 25px;
-			margin: 30px 0;
-			border: 2px solid var(--border-color);
-			border-radius: 12px;
-			position: relative;
-			width: 45%;
-			box-shadow: 0 5px 20px var(--shadow);
-			transition: all 0.3s ease;
-		}
-
-		.timeline-item:hover {
-			transform: translateX(5px);
-			border-color: var(--accent-color);
-			box-shadow: 0 8px 25px var(--shadow);
-		}
-
-		.timeline-item:nth-child(odd) {
-			left: 0;
-		}
-
-		.timeline-item:nth-child(even) {
-			left: 55%;
-		}
-
-		.timeline-item::before {
-			content: '';
-			position: absolute;
-			top: 25px;
-			width: 16px;
-			height: 16px;
-			background: var(--accent-color);
-			border-radius: 50%;
-			border: 3px solid var(--card-bg);
-			box-shadow: 0 0 10px var(--accent-color);
-		}
-
-		.timeline-item:nth-child(odd)::before {
-			right: -48px;
-		}
-
-		.timeline-item:nth-child(even)::before {
-			left: -48px;
-		}
-
-		.timeline-item h3 {
-			color: var(--accent-color);
-			margin-bottom: 10px;
-			font-size: 1.4em;
-		}
-
-		.timeline-item p {
-			opacity: 0.9;
-			line-height: 1.7;
-		}
-
-		.skills-grid {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-			gap: 25px;
-			margin-top: 30px;
-		}
-
-		.skill-card {
-			background: var(--card-bg);
-			padding: 25px;
-			border-radius: 12px;
-			text-align: center;
-			border: 2px solid var(--border-color);
-			transition: all 0.3s ease;
-		}
-
-		.skill-card:hover {
-			transform: translateY(-8px);
-			box-shadow: 0 12px 30px var(--shadow);
-			border-color: var(--accent-color);
-		}
-
-		.skill-card h3 {
-			color: var(--accent-color);
-			margin-bottom: 15px;
-			font-size: 1.3em;
-		}
-
-		.projects {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-			gap: 25px;
-			margin-top: 30px;
-		}
-
-		.project-card {
-			background: var(--card-bg);
-			padding: 25px;
-			border-radius: 12px;
-			border: 2px solid var(--border-color);
-			transition: all 0.3s ease;
-		}
-
-		.project-card:hover {
-			transform: translateY(-5px);
-			box-shadow: 0 8px 25px var(--shadow);
-			border-color: var(--accent-color);
-		}
-
-		.motivation {
-			background: var(--card-bg);
-			color: var(--text-color);
-			padding: 50px 40px;
-			border-radius: 15px;
-			text-align: center;
-			border: 2px solid var(--accent-color);
-			position: relative;
-			overflow: hidden;
-		}
-
-		.motivation h2 {
-			color: var(--accent-color);
-			border-bottom-color: var(--accent-color);
-			position: relative;
-		}
-
-		.motivation p {
-			font-size: 1.2em;
-			margin-bottom: 20px;
-			position: relative;
-			line-height: 1.8;
-			opacity: 0.9;
-		}
-
-		footer {
-			text-align: center;
-			margin-top: 50px;
-			padding: 40px 20px;
-			background: var(--header-bg);
-			color: var(--text-color);
-			border-radius: 15px;
-			box-shadow: 0 10px 30px var(--shadow);
-			border: 2px solid var(--border-color);
-		}
-
-		.btn {
-			display: inline-block;
-			padding: 15px 35px;
-			background: var(--accent-color);
-			color: var(--white);
-			text-decoration: none;
-			border-radius: 30px;
-			transition: all 0.3s ease;
-			margin: 10px;
-			border: 2px solid transparent;
-			font-weight: bold;
-			box-shadow: 0 4px 15px var(--shadow);
-		}
-
-		.btn:hover {
-			background: transparent;
-			border-color: var(--accent-color);
-			color: var(--accent-color);
-			transform: translateY(-3px);
-			box-shadow: 0 8px 25px var(--shadow);
-		}
-
-		/* Стили для ссылок */
-		a {
-			color: var(--accent-color);
-			text-decoration: none;
-			transition: all 0.3s ease;
-			padding: 2px 6px;
-			border-radius: 4px;
-		}
-
-		a:hover {
-			background-color: var(--accent-color);
-			color: var(--white);
-			box-shadow: 0 0 15px var(--shadow);
-			transform: translateY(-2px);
-		}
-
-		@media (max-width: 768px) {
-			.container {
-				padding: 15px;
-			}
-
-			h1 {
-				font-size: 2.2em;
-			}
-
-			.timeline::before {
-				left: 20px;
-			}
-
-			.timeline-item {
-				width: calc(100% - 50px);
-				left: 50px !important;
-			}
-
-			.timeline-item::before {
-				left: -40px !important;
-			}
-
-			.skills-grid {
-				grid-template-columns: 1fr;
-			}
-
-			.theme-toggle {
-				top: 10px;
-				right: 10px;
-				width: 45px;
-				height: 45px;
-			}
-		}
-
-		@media (max-width: 480px) {
-			h1 {
-				font-size: 1.8em;
-			}
-
-			h2 {
-				font-size: 1.6em;
-			}
-
-			.journey-section {
-				padding: 25px 20px;
-			}
-
-			.btn {
-				padding: 12px 25px;
-				margin: 5px;
-				display: block;
-			}
-		}
-	</style>
-</head>
-
-<body data-theme="dark">
-	<button class="theme-toggle" onclick="toggleTheme()">🌙</button>
-
-	<div class="container">
-		<header>
-			<h1>Работу выполнила: <br> Бердникова Анна Денисовна</h1>
-			<p class="subtitle">Мой путь в изучении HTML</p>
-			<p>Курс от НаДиП - от новичка до создателя веб-страниц</p>
-		</header>
-
-		<section class="journey-section">
-			<h2>📚 Начало...</h2>
-			<div class="timeline">
-				<div class="timeline-item">
-					<h3>Основы HTML</h3>
-					<p>Познакомилась с тегами, структурой документа, научилась создавать простые страницы</p>
-				</div>
-				<div class="timeline-item">
-					<h3>Работа с текстом и ссылками</h3>
-					<p>Освоила форматирование текста, создание списков и работа с гиперссылками☠</p>
-				</div>
-				<div class="timeline-item">
-					<h3>Изображения и таблицы</h3>
-					<p>Научилась добавлять изображения, создавать таблицы и формы</p>
-				</div>
-				<div class="timeline-item">
-					<h3>Семантическая верстка</h3>
-					<p>Познакомилась с современными тегами: header, footer, section, article и др.</p>
-				</div>
-			</div>
-		</section>
-
-		<section class="journey-section">
-			<h2>💪 Приобретенные навыки</h2>
-			<div class="skills-grid">
-				<div class="skill-card">
-					<h3>Структура HTML</h3>
-					<p>Правильное использование тегов и создание семантической разметки</p>
-				</div>
-				<div class="skill-card">
-					<h3>Формы и инпуты</h3>
-					<p>Создание интерактивных форм с различными типами полей</p>
-				</div>
-				<div class="skill-card">
-					<h3>Мультимедиа</h3>
-					<p>Работа с изображениями, видео и аудио контентом</p>
-				</div>
-				<div class="skill-card">
-					<h3>Доступность</h3>
-					<p>Создание сайтов, понятных для всех пользователей</p>
-				</div>
-			</div>
-		</section>
-
-		<section class="journey-section">
-			<h2>🚀 Мои проекты</h2>
-			<div class="projects">
-				<div class="project-card">
-					<h3><a href="https://nrostomentos.github.io/workgoo/"class="btn">квест</a></h3>
-          <h3><a href="https://nrostomentos.github.io/anpractic/"class="btn">мопсы</a></h3>
-		<h3><a href="https://nrostomentos.github.io/tfff/"class="btn">шрифты</a></h3>
-				</div>
-			</div>
-		</section>
-
-		<section class="journey-section motivation">
-			<h2>✨ Мотивация</h2>
-			<p>"Курс НаДиП открыл для меня мир веб-разработки. Теперь я могу создавать красивые и функциональные
-				веб-страницы, и это только начало моего пути!"</p>
-			<p><strong>Спасибо за курс!</strong></p>
-		</section>
-
-		<footer>
-			<p>Создано с любовью и использованием HTML & CSS</p>
-			<p>© 2026 Выпускница курса НаДиП</p>
-			<div>
-				<a href="https://github.com/nrostomentos" class="btn">На GitHub</a>
-				<a href="https://t.me/swn_f" class="btn">Связаться со мной</a>
-			</div>
-		</footer>
-	</div>
-
-	<script>
-		function toggleTheme() {
-            const body = document.body;
-            const themeToggle = document.querySelector('.theme-toggle');
-            const currentTheme = body.getAttribute('data-theme');
-            
-            if (currentTheme === 'dark') {
-                body.setAttribute('data-theme', 'light');
-                themeToggle.textContent = '☀️';
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                themeToggle.textContent = '🌙';
-            }
-            
-            // Сохраняем выбор темы в localStorage
-            localStorage.setItem('theme', body.getAttribute('data-theme'));
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Итоговая работа Бердниковой Анны</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
-        // Загружаем сохраненную тему при загрузке страницы
-        document.addEventListener('DOMContentLoaded', function() {
-            const savedTheme = localStorage.getItem('theme') || 'dark';
-            document.body.setAttribute('data-theme', savedTheme);
-            
-            const themeToggle = document.querySelector('.theme-toggle');
-            themeToggle.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
-        });
-	</script>
-</body>
+        /* Цветовые переменные — строго по заданию */
+        :root {
+            /* Общий акцентный цвет (#be6a00) присутствует в обеих темах */
+            --accent-main: #be6a00;
+            /* Дополнительные оттенки для тёмной и светлой темы */
+            --dark-bg: #5e2706;
+            --dark-card: #3b1a04;
+            --dark-text: #fff5e8;
+            --light-bg: #ffd177;
+            --light-card: #ffeaac;
+            --light-text: #2c1a0a;
+        }
 
+        [data-theme="dark"] {
+            --bg-color: var(--dark-bg);
+            --text-color: var(--dark-text);
+            --card-bg: var(--dark-card);
+            --border-color: var(--accent-main);
+            --shadow: rgba(0, 0, 0, 0.4);
+            --btn-bg: var(--accent-main);
+            --btn-hover-bg: #ff8c2c;
+        }
+
+        [data-theme="light"] {
+            --bg-color: var(--light-bg);
+            --text-color: var(--light-text);
+            --card-bg: var(--light-card);
+            --border-color: var(--accent-main);
+            --shadow: rgba(94, 39, 6, 0.15);
+            --btn-bg: var(--accent-main);
+            --btn-hover-bg: #e07d1a;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Georgia', 'Times New Roman', serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            line-height: 1.4;
+            padding: 20px;
+        }
+
+        /* кнопка переключения темы */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--accent-main);
+            color: white;
+            border: 2px solid #fff3e0;
+            border-radius: 60px;
+            width: 52px;
+            height: 52px;
+            cursor: pointer;
+            font-size: 1.6rem;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 18px var(--shadow);
+            transition: all 0.25s ease;
+            backdrop-filter: blur(2px);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+            background: #ff8c2c;
+            border-color: var(--accent-main);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 10px 0 30px;
+        }
+
+        /* общие рамки для блоков */
+        .frame-block {
+            border: 3px solid var(--border-color);
+            border-radius: 28px;
+            background: var(--card-bg);
+            box-shadow: 0 12px 28px var(--shadow);
+            padding: 24px 28px;
+            margin-bottom: 32px;
+            transition: transform 0.2s;
+        }
+
+        /* ЗАГОЛОВОК: крупная рамка с большими буквами */
+        .main-header {
+            text-align: center;
+            border: 4px solid var(--border-color);
+            border-radius: 40px;
+            background: var(--card-bg);
+            padding: 40px 20px 30px;
+            margin-bottom: 28px;
+            box-shadow: 0 14px 30px var(--shadow);
+        }
+
+        .main-header h1 {
+            font-size: 3.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 900;
+            color: var(--accent-main);
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+            word-break: break-word;
+        }
+
+        .header-sub {
+            font-size: 1.4rem;
+            margin-top: 18px;
+            font-style: italic;
+            font-weight: 500;
+            color: var(--text-color);
+            border-top: 2px dashed var(--border-color);
+            display: inline-block;
+            padding-top: 12px;
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+
+        /* секция с приложениями/сайтами (на английском в рамках) */
+        .apps-section {
+            text-align: center;
+        }
+
+        .apps-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+        .app-item {
+            border: 2px solid var(--border-color);
+            background: var(--bg-color);
+            padding: 10px 24px;
+            border-radius: 60px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            backdrop-filter: blur(2px);
+            transition: all 0.2s;
+            color: var(--accent-main);
+            box-shadow: 0 2px 6px var(--shadow);
+        }
+
+        .app-item:hover {
+            transform: translateY(-3px);
+            background: var(--accent-main);
+            color: white;
+            border-color: white;
+        }
+
+        /* Мои проекты — отдельная рамка */
+        .projects-frame h2, .skills-frame h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--accent-main);
+            letter-spacing: 1px;
+            border-bottom: 2px solid var(--border-color);
+            display: inline-block;
+            width: auto;
+            padding-bottom: 8px;
+        }
+
+        .projects-frame {
+            text-align: center;
+        }
+
+        .projects-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 25px;
+        }
+
+        .project-link {
+            background: var(--accent-main);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: 0.2s;
+            display: inline-block;
+            box-shadow: 0 4px 10px var(--shadow);
+            border: 1px solid rgba(255,255,200,0.5);
+        }
+
+        .project-link:hover {
+            background: var(--btn-hover-bg);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 20px var(--shadow);
+        }
+
+        /* навыки — сокращённый блок (коротко) */
+        .skills-short {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 14px;
+            margin-top: 18px;
+        }
+        .skill-badge {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 40px;
+            padding: 6px 20px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .skills-frame p {
+            text-align: center;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* ссылки гит + тг в конце */
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        .social-btn {
+            background: var(--accent-main);
+            color: white;
+            padding: 12px 32px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: 0.2s;
+            border: 1px solid rgba(255,245,200,0.8);
+        }
+        .social-btn:hover {
+            background: var(--btn-hover-bg);
+            transform: translateY(-3px);
+        }
+
+        /* дополнительные мини-правки */
+        .small-note {
+            text-align: center;
+            font-size: 0.85rem;
+            margin-top: 20px;
+            opacity: 0.7;
+        }
+
+        hr {
+            border-color: var(--border-color);
+            margin: 6px 0;
+        }
+
+        @media (max-width: 680px) {
+            .main-header h1 {
+                font-size: 2.2rem;
+            }
+            .header-sub {
+                font-size: 1.1rem;
+            }
+            .app-item {
+                font-size: 0.9rem;
+                padding: 6px 18px;
+            }
+            .frame-block {
+                padding: 20px 16px;
+            }
+            .container {
+                padding: 0 8px;
+            }
+            .theme-toggle {
+                width: 44px;
+                height: 44px;
+                font-size: 1.3rem;
+                top: 12px;
+                right: 12px;
+            }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    <button class="theme-toggle" id="themeToggleBtn" aria-label="Сменить тему">🌙</button>
+
+    <div class="container">
+        <!-- 1. Большими буквами в рамке: Итоговая работа Бердниковой Анны -->
+        <div class="main-header">
+            <h1>ИТОГОВАЯ РАБОТА<br>БЕРДНИКОВОЙ АННЫ</h1>
+            <!-- чуть ниже мелким шрифтом "полностью прошла курс от НАДиП" -->
+            <div class="header-sub">📘 полностью прошла курс от НАДиП</div>
+        </div>
+
+        <!-- 2. Названия приложений/сайтов в рамках, на английском -->
+        <div class="frame-block apps-section">
+            <div class="apps-grid">
+                <span class="app-item">UNITY</span>
+                <span class="app-item">FIGMA</span>
+                <span class="app-item">ROBLOX STUDIO</span>
+                <span class="app-item">GITHUB</span>
+                <span class="app-item">HIGHRISE</span>
+                <span class="app-item">KRITA</span>
+				<span class="app-item">JSITOR</span>
+            </div>
+        </div>
+
+        <!-- 3. Мои проекты (отдельная рамка) -->
+        <div class="frame-block projects-frame">
+            <h2>📁 МОИ ПРОЕКТЫ</h2>
+            <div class="projects-container">
+                <a href="https://nrostomentos.github.io/workgoo/" class="project-link" target="_blank" rel="noopener">🎮 Квест</a>
+                <a href="https://nrostomentos.github.io/anpractic/" class="project-link" target="_blank" rel="noopener">🐾 Мопсы</a>
+                <a href="https://nrostomentos.github.io/tfff/" class="project-link" target="_blank" rel="noopener">✍️ Шрифты</a>
+            </div>
+        </div>
+
+        <!-- 4. Приобретенные навыки — сокращённый вариант (коротко, но оставлено) -->
+        <div class="frame-block skills-frame">
+            <h2>📌 НАВЫКИ</h2>
+            <div class="skills-short">
+                <span class="skill-badge">HTML5 / Семантика</span>
+                <span class="skill-badge">CSS3 / Flex/Grid</span>
+                <span class="skill-badge">Адаптивная вёрстка</span>
+                <span class="skill-badge">Формы / UI-элементы</span>
+                <span class="skill-badge">Работа с Figma</span>
+                <span class="skill-badge">Git / GitHub</span>
+            </div>
+            <p style="margin-top: 16px; font-size: 0.9rem;">⚡ основы веб-разработки, создание интерактивных страниц</p>
+        </div>
+
+        <!-- 5. Ссылки на GitHub и Telegram в конце (оставлены) -->
+        <div class="frame-block" style="text-align: center; padding: 28px 20px;">
+            <div class="footer-links">
+                <a href="https://github.com/nrostomentos" class="social-btn" target="_blank" rel="noopener">🐙 GitHub</a>
+                <a href="https://t.me/swn_f" class="social-btn" target="_blank" rel="noopener">📱 Telegram</a>
+            </div>
+            <div class="small-note">
+                ✨ итоговая работа | курс НАДиП
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // Функция переключения темы с учетом цветов: #be6a00 (общий), #5e2706 (темный фон), #ffd177 (светлый фон)
+            // В стилях уже прописаны переменные: акцент #be6a00, тёмный фон #5e2706, светлый #ffd177
+            const toggleBtn = document.getElementById('themeToggleBtn');
+            const rootAttr = document.body;
+
+            function setTheme(theme) {
+                rootAttr.setAttribute('data-theme', theme);
+                localStorage.setItem('userTheme', theme);
+                if (toggleBtn) {
+                    toggleBtn.textContent = theme === 'dark' ? '🌙' : '☀️';
+                }
+            }
+
+            function toggleTheme() {
+                const current = rootAttr.getAttribute('data-theme');
+                const newTheme = current === 'dark' ? 'light' : 'dark';
+                setTheme(newTheme);
+            }
+
+            // Загрузка сохранённой темы
+            const savedTheme = localStorage.getItem('userTheme');
+            if (savedTheme && (savedTheme === 'dark' || savedTheme === 'light')) {
+                setTheme(savedTheme);
+            } else {
+                // по умолчанию тёмный (как в изначальном коде)
+                setTheme('dark');
+            }
+
+            if (toggleBtn) {
+                toggleBtn.addEventListener('click', toggleTheme);
+            }
+        })();
+    </script>
+</body>
 </html>
+```
