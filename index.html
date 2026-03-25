@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Итоговая работа Бердниковой Анны</title>
+    <title>Danganronpa | Итоговая работа Анны Бердниковой</title>
     <style>
         * {
             margin: 0;
@@ -12,128 +12,154 @@
             transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
-        /* Цветовые переменные — строго по заданию */
+        /* --- ЦВЕТА DANGANRONPA --- */
         :root {
-            /* Общий акцентный цвет (#be6a00) присутствует в обеих темах */
-            --accent-main: #be6a00;
-            /* Дополнительные оттенки для тёмной и светлой темы */
-            --dark-bg: #5e2706;
-            --dark-card: #3b1a04;
-            --dark-text: #fff5e8;
-            --light-bg: #ffd177;
-            --light-card: #ffeaac;
-            --light-text: #2c1a0a;
+            --dr-pink: #e6007a;      /* Культовый розовый Danganronpa */
+            --dr-red: #b52e2e;       /* Темно-красный для акцентов */
+            --dr-black: #1a1a1a;     /* Глубокий черный */
+            --dr-white: #f8f8f8;     /* Белоснежный фон */
+            --dr-gray: #2e2e2e;      /* Темно-серый для текста в светлой теме */
+            --dr-shadow: rgba(0, 0, 0, 0.2);
         }
 
-        [data-theme="dark"] {
-            --bg-color: var(--dark-bg);
-            --text-color: var(--dark-text);
-            --card-bg: var(--dark-card);
-            --border-color: var(--accent-main);
-            --shadow: rgba(0, 0, 0, 0.4);
-            --btn-bg: var(--accent-main);
-            --btn-hover-bg: #ff8c2c;
-        }
-
+        /* Светлая тема (Надежда / Обычная школа) */
         [data-theme="light"] {
-            --bg-color: var(--light-bg);
-            --text-color: var(--light-text);
-            --card-bg: var(--light-card);
-            --border-color: var(--accent-main);
-            --shadow: rgba(94, 39, 6, 0.15);
-            --btn-bg: var(--accent-main);
-            --btn-hover-bg: #e07d1a;
+            --bg-color: var(--dr-white);
+            --text-color: var(--dr-black);
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --border-color: var(--dr-pink);
+            --shadow: var(--dr-shadow);
+            --btn-bg: var(--dr-pink);
+            --btn-hover-bg: #ff1a8c;
+            --secondary-text: #4a4a4a;
+            --badge-bg: #f0f0f0;
+        }
+
+        /* Темная тема (Отчаяние / MonoKuma Style) */
+        [data-theme="dark"] {
+            --bg-color: #0a0a0a;
+            --text-color: #e0e0e0;
+            --card-bg: rgba(20, 20, 20, 0.9);
+            --border-color: var(--dr-red);
+            --shadow: rgba(0, 0, 0, 0.6);
+            --btn-bg: var(--dr-red);
+            --btn-hover-bg: #ff4d4d;
+            --secondary-text: #b0b0b0;
+            --badge-bg: #1e1e1e;
         }
 
         body {
-            font-family: 'Segoe UI', 'Georgia', 'Times New Roman', serif;
+            font-family: 'Segoe UI', 'Poppins', 'Impact', 'Arial Black', sans-serif;
             background: var(--bg-color);
             color: var(--text-color);
             min-height: 100vh;
-            line-height: 1.4;
+            line-height: 1.5;
             padding: 20px;
+            /* Добавляем легкую текстуру, как в игре */
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(230, 0, 122, 0.02) 30px, rgba(230, 0, 122, 0.02) 60px);
         }
 
-        /* кнопка переключения темы */
+        /* Кнопка переключения темы - стилизована под Монокуму */
         .theme-toggle {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: var(--accent-main);
+            background: var(--btn-bg);
             color: white;
-            border: 2px solid #fff3e0;
-            border-radius: 60px;
-            width: 52px;
-            height: 52px;
+            border: 3px solid var(--text-color);
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
             cursor: pointer;
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 6px 18px var(--shadow);
-            transition: all 0.25s ease;
-            backdrop-filter: blur(2px);
+            box-shadow: 0 4px 0 var(--dr-black);
+            transition: all 0.1s linear;
+            font-family: monospace;
         }
 
-        .theme-toggle:hover {
-            transform: scale(1.05);
-            background: #ff8c2c;
-            border-color: var(--accent-main);
+        .theme-toggle:active {
+            transform: translateY(2px);
+            box-shadow: 0 1px 0 var(--dr-black);
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 10px 0 30px;
         }
 
-        /* общие рамки для блоков */
+        /* Стиль рамок как в игре: четкие, контрастные, с "комиксными" тенями */
         .frame-block {
             border: 3px solid var(--border-color);
-            border-radius: 28px;
+            border-radius: 24px;
             background: var(--card-bg);
-            box-shadow: 0 12px 28px var(--shadow);
-            padding: 24px 28px;
-            margin-bottom: 32px;
-            transition: transform 0.2s;
+            box-shadow: 8px 8px 0 var(--dr-black);
+            padding: 28px 32px;
+            margin-bottom: 36px;
+            backdrop-filter: blur(2px);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .frame-block:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 12px 12px 0 var(--dr-black);
         }
 
-        /* ЗАГОЛОВОК: крупная рамка с большими буквами */
+        /* ЗАГОЛОВОК: Стиль "Надежда против Отчаяния" */
         .main-header {
             text-align: center;
             border: 4px solid var(--border-color);
-            border-radius: 40px;
+            border-radius: 48px;
             background: var(--card-bg);
-            padding: 40px 20px 30px;
-            margin-bottom: 28px;
-            box-shadow: 0 14px 30px var(--shadow);
+            padding: 50px 20px 40px;
+            margin-bottom: 32px;
+            box-shadow: 10px 10px 0 var(--dr-black);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Эффект "крови" или "лепестков" на заголовке (розовые пятна) */
+        .main-header::before {
+            content: "⚠";
+            font-size: 120px;
+            opacity: 0.03;
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            pointer-events: none;
+            font-family: monospace;
         }
 
         .main-header h1 {
-            font-size: 3.5rem;
-            letter-spacing: 2px;
+            font-size: 3.2rem;
+            letter-spacing: 3px;
             text-transform: uppercase;
             font-weight: 900;
-            color: var(--accent-main);
-            text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+            color: var(--border-color);
+            text-shadow: 4px 4px 0 var(--dr-black);
             word-break: break-word;
+            font-family: 'Impact', 'Arial Black', sans-serif;
         }
 
         .header-sub {
-            font-size: 1.4rem;
-            margin-top: 18px;
-            font-style: italic;
-            font-weight: 500;
-            color: var(--text-color);
-            border-top: 2px dashed var(--border-color);
+            font-size: 1.2rem;
+            margin-top: 20px;
+            font-weight: bold;
+            color: var(--secondary-text);
+            background: rgba(0,0,0,0.05);
             display: inline-block;
-            padding-top: 12px;
-            padding-left: 12px;
-            padding-right: 12px;
+            padding: 8px 24px;
+            border-radius: 40px;
+            backdrop-filter: blur(4px);
+            border-left: 3px solid var(--border-color);
+            border-right: 3px solid var(--border-color);
         }
 
-        /* секция с приложениями/сайтами (на английском в рамках) */
+        /* Секция с инструментами (приложения) */
         .apps-section {
             text-align: center;
         }
@@ -142,130 +168,137 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 18px;
+            gap: 16px;
             margin-top: 20px;
         }
 
-        .app-item {
+        .app-link {
+            display: inline-block;
+            background: var(--badge-bg);
             border: 2px solid var(--border-color);
-            background: var(--bg-color);
-            padding: 10px 24px;
+            padding: 8px 20px;
             border-radius: 60px;
-            font-size: 1.2rem;
-            font-weight: 600;
+            font-size: 1rem;
+            font-weight: 800;
             letter-spacing: 1px;
             text-transform: uppercase;
-            backdrop-filter: blur(2px);
             transition: all 0.2s;
-            color: var(--accent-main);
-            box-shadow: 0 2px 6px var(--shadow);
+            color: var(--border-color);
+            text-decoration: none;
+            font-family: monospace;
+            box-shadow: 2px 2px 0 var(--dr-black);
         }
 
-        .app-item:hover {
-            transform: translateY(-3px);
-            background: var(--accent-main);
+        .app-link:hover {
+            transform: translate(-2px, -2px);
+            background: var(--border-color);
             color: white;
-            border-color: white;
+            box-shadow: 4px 4px 0 var(--dr-black);
+            border-color: var(--dr-black);
         }
 
-        /* Мои проекты — отдельная рамка */
+        /* Проекты */
         .projects-frame h2, .skills-frame h2 {
             text-align: center;
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: var(--accent-main);
-            letter-spacing: 1px;
-            border-bottom: 2px solid var(--border-color);
-            display: inline-block;
-            width: auto;
-            padding-bottom: 8px;
-        }
-
-        .projects-frame {
-            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 28px;
+            color: var(--border-color);
+            letter-spacing: 2px;
+            font-family: 'Impact', sans-serif;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 0 var(--dr-black);
         }
 
         .projects-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 24px;
-            margin-top: 25px;
+            gap: 30px;
+            margin-top: 20px;
         }
 
         .project-link {
-            background: var(--accent-main);
+            background: var(--btn-bg);
             color: white;
-            padding: 12px 28px;
-            border-radius: 50px;
+            padding: 14px 32px;
+            border-radius: 60px;
             font-weight: bold;
             text-decoration: none;
             font-size: 1.2rem;
-            transition: 0.2s;
+            transition: 0.1s linear;
             display: inline-block;
-            box-shadow: 0 4px 10px var(--shadow);
-            border: 1px solid rgba(255,255,200,0.5);
+            box-shadow: 4px 4px 0 var(--dr-black);
+            border: none;
+            font-family: monospace;
+            text-transform: uppercase;
         }
 
         .project-link:hover {
             background: var(--btn-hover-bg);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 20px var(--shadow);
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 var(--dr-black);
         }
 
-        /* навыки — сокращённый блок (коротко) */
+        /* Навыки */
         .skills-short {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 14px;
-            margin-top: 18px;
+            margin-top: 20px;
         }
         .skill-badge {
-            background: var(--bg-color);
+            background: var(--badge-bg);
             border: 1px solid var(--border-color);
             border-radius: 40px;
-            padding: 6px 20px;
-            font-size: 0.95rem;
-            font-weight: 500;
+            padding: 8px 22px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-color);
+            box-shadow: 1px 1px 0 var(--dr-black);
         }
         .skills-frame p {
             text-align: center;
-            margin-bottom: 8px;
-            font-size: 1rem;
+            margin-top: 24px;
+            font-size: 0.9rem;
             opacity: 0.9;
+            font-style: italic;
         }
 
-        /* ссылки гит + тг в конце */
+        /* Footer ссылки */
         .footer-links {
             display: flex;
             justify-content: center;
             gap: 30px;
-            margin-top: 30px;
+            margin-top: 10px;
             flex-wrap: wrap;
         }
         .social-btn {
-            background: var(--accent-main);
+            background: var(--btn-bg);
             color: white;
             padding: 12px 32px;
             border-radius: 60px;
             text-decoration: none;
             font-weight: bold;
             font-size: 1.1rem;
-            transition: 0.2s;
-            border: 1px solid rgba(255,245,200,0.8);
+            transition: 0.1s linear;
+            box-shadow: 4px 4px 0 var(--dr-black);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
         .social-btn:hover {
             background: var(--btn-hover-bg);
-            transform: translateY(-3px);
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 var(--dr-black);
         }
 
-        /* дополнительные мини-правки */
         .small-note {
             text-align: center;
-            font-size: 0.85rem;
-            margin-top: 20px;
-            opacity: 0.7;
+            font-size: 0.8rem;
+            margin-top: 24px;
+            opacity: 0.6;
+            font-family: monospace;
         }
 
         hr {
@@ -273,16 +306,17 @@
             margin: 6px 0;
         }
 
+        /* Адаптивность */
         @media (max-width: 680px) {
             .main-header h1 {
-                font-size: 2.2rem;
+                font-size: 2rem;
             }
             .header-sub {
-                font-size: 1.1rem;
-            }
-            .app-item {
                 font-size: 0.9rem;
-                padding: 6px 18px;
+            }
+            .app-link {
+                font-size: 0.8rem;
+                padding: 5px 14px;
             }
             .frame-block {
                 padding: 20px 16px;
@@ -291,69 +325,58 @@
                 padding: 0 8px;
             }
             .theme-toggle {
-                width: 44px;
-                height: 44px;
-                font-size: 1.3rem;
+                width: 48px;
+                height: 48px;
+                font-size: 1.4rem;
                 top: 12px;
                 right: 12px;
             }
+            .project-link {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
         }
-
-    .app-link {
-        display: inline-block;
-        border: 2px solid var(--border-color);
-        background: var(--bg-color);
-        padding: 10px 24px;
-        border-radius: 60px;
-        font-size: 1.2rem;
-        font-weight: 600;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        backdrop-filter: blur(2px);
-        transition: all 0.2s;
-        color: var(--accent-main);
-        box-shadow: 0 2px 6px var(--shadow);
-        text-decoration: none;
-        cursor: pointer;
-    }
-
-    .app-link:hover {
-        transform: translateY(-3px);
-        background: var(--accent-main);
-        color: white;
-        border-color: white;
-        text-decoration: none;
-    }
+        
+        /* Дополнительный штрих Danganronpa: полоски на кнопках */
+        .project-link, .social-btn, .app-link {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-link::after {
+            content: "★";
+            margin-left: 8px;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
     </style>
 </head>
-<body data-theme="dark">
-    <button class="theme-toggle" id="themeToggleBtn" aria-label="Сменить тему">🌙</button>
+<body data-theme="light">
+    <button class="theme-toggle" id="themeToggleBtn" aria-label="Punishment Time!">🎲</button>
 
     <div class="container">
-        <!-- 1. Большими буквами в рамке: Итоговая работа Бердниковой Анны -->
+        <!-- 1. Главный заголовок в стиле "Классная комната Надежды" -->
         <div class="main-header">
             <h1>ИТОГОВАЯ РАБОТА<br>БЕРДНИКОВОЙ АННЫ</h1>
-            <!-- чуть ниже мелким шрифтом "полностью прошла курс от НАДиП" -->
-            <div class="header-sub">📘 полностью прошла курс от НАДиП</div>
+            <div class="header-sub">⚡ 完全に合格しました | Полный курс НАДиП ⚡</div>
         </div>
 
-        <!-- 2. Названия приложений/сайтов в рамках, на английском -->
-        <!-- 2. Названия приложений/сайтов в рамках, на английском, с ссылками -->
-<div class="frame-block apps-section">
-    <div class="apps-grid">
-        <a href="#" class="app-link" target="_blank" rel="noopener">UNITY</a>
-        <a href="https://www.figma.com/files/team/1555152438497769839/project/462519846?fuid=1555152436432346659" class="app-link" target="_blank" rel="noopener">FIGMA</a>
-        <a href="#" class="app-link" target="_blank" rel="noopener">ROBLOX STUDIO</a>
-        <a href="https://nrostomentos.github.io/anpractic/" class="app-link" target="_blank" rel="noopener">GITHUB</a>
-        <a href="#" class="app-link" target="_blank" rel="noopener">HIGHRISE</a>
-        <a href="#" class="app-link" target="_blank" rel="noopener">KRITA</a>
-        <a href="#" class="app-link" target="_blank" rel="noopener">GSITOR</a>
-    </div>
-</div>
+        <!-- 2. Инструменты (приложения) как "Ультимативные способности" -->
+        <div class="frame-block apps-section">
+            <div class="apps-grid">
+                <a href="#" class="app-link" target="_blank" rel="noopener">UNITY</a>
+                <a href="https://www.figma.com/files/team/1555152438497769839/project/462519846?fuid=1555152436432346659" class="app-link" target="_blank" rel="noopener">FIGMA</a>
+                <a href="#" class="app-link" target="_blank" rel="noopener">ROBLOX STUDIO</a>
+                <a href="https://nrostomentos.github.io/anpractic/" class="app-link" target="_blank" rel="noopener">GITHUB</a>
+                <a href="#" class="app-link" target="_blank" rel="noopener">HIGHRISE</a>
+                <a href="#" class="app-link" target="_blank" rel="noopener">KRITA</a>
+                <a href="#" class="app-link" target="_blank" rel="noopener">GSITOR</a>
+            </div>
+        </div>
 
-        <!-- 3. Мои проекты (отдельная рамка) -->
+        <!-- 3. Мои проекты — как "Убийственные улики" -->
         <div class="frame-block projects-frame">
-            <h2>📁 МОИ ПРОЕКТЫ</h2>
+            <h2>🔍 МОИ ПРОЕКТЫ</h2>
             <div class="projects-container">
                 <a href="https://nrostomentos.github.io/workgoo/" class="project-link" target="_blank" rel="noopener">🎮 Квест</a>
                 <a href="https://nrostomentos.github.io/anpractic/" class="project-link" target="_blank" rel="noopener">🐾 Мопсы</a>
@@ -361,7 +384,7 @@
             </div>
         </div>
 
-        <!-- 4. Приобретенные навыки — сокращённый вариант (коротко, но оставлено) -->
+        <!-- 4. Навыки — как "Фразы из классного суда" -->
         <div class="frame-block skills-frame">
             <h2>📌 НАВЫКИ</h2>
             <div class="skills-short">
@@ -372,33 +395,34 @@
                 <span class="skill-badge">Работа с Figma</span>
                 <span class="skill-badge">Git / GitHub</span>
             </div>
-            <p style="margin-top: 16px; font-size: 0.9rem;">⚡ основы веб-разработки, создание интерактивных страниц</p>
+            <p>⭐ SORE WA CHIGAU YO! (Это не так!) — Я докажу это своими работами ⭐</p>
         </div>
 
-        <!-- 5. Ссылки на GitHub и Telegram в конце (оставлены) -->
-        <div class="frame-block" style="text-align: center; padding: 28px 20px;">
+        <!-- 5. Ссылки и подвал в стиле "После классного суда" -->
+        <div class="frame-block" style="text-align: center; padding: 32px 20px;">
             <div class="footer-links">
                 <a href="https://github.com/nrostomentos" class="social-btn" target="_blank" rel="noopener">🐙 GitHub</a>
                 <a href="https://t.me/swn_f" class="social-btn" target="_blank" rel="noopener">📱 Telegram</a>
             </div>
             <div class="small-note">
-                ✨ итоговая работа | курс НАДиП
+                ✨ 希望ヶ峰学園 | Надежда и Отчаяние ✨<br>
+                итоговая работа | курс НАДиП
             </div>
         </div>
     </div>
 
     <script>
         (function() {
-            // Функция переключения темы с учетом цветов: #be6a00 (общий), #5e2706 (темный фон), #ffd177 (светлый фон)
-            // В стилях уже прописаны переменные: акцент #be6a00, тёмный фон #5e2706, светлый #ffd177
+            // Каноничная смена темы: Светлая (Надежда/Розовая) и Тёмная (Отчаяние/Красная)
             const toggleBtn = document.getElementById('themeToggleBtn');
             const rootAttr = document.body;
 
             function setTheme(theme) {
                 rootAttr.setAttribute('data-theme', theme);
-                localStorage.setItem('userTheme', theme);
+                localStorage.setItem('drTheme', theme);
                 if (toggleBtn) {
-                    toggleBtn.textContent = theme === 'dark' ? '🌙' : '☀️';
+                    toggleBtn.textContent = theme === 'dark' ? '🖤' : '💖';
+                    toggleBtn.style.background = theme === 'dark' ? 'var(--dr-red)' : 'var(--dr-pink)';
                 }
             }
 
@@ -408,13 +432,12 @@
                 setTheme(newTheme);
             }
 
-            // Загрузка сохранённой темы
-            const savedTheme = localStorage.getItem('userTheme');
+            const savedTheme = localStorage.getItem('drTheme');
             if (savedTheme && (savedTheme === 'dark' || savedTheme === 'light')) {
                 setTheme(savedTheme);
             } else {
-                // по умолчанию тёмный (как в изначальном коде)
-                setTheme('dark');
+                // По умолчанию ставим светлую тему Danganronpa (розовый на белом) — стиль Надежды
+                setTheme('light');
             }
 
             if (toggleBtn) {
@@ -424,4 +447,3 @@
     </script>
 </body>
 </html>
-```
