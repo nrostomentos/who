@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Danganronpa | Итоговая работа Анны Бердниковой</title>
+    <title>Под стиль игры Danganronpa | Итоговая работа Анны Бердниковой</title>
     <style>
         * {
             margin: 0;
@@ -418,30 +418,32 @@
             text-shadow: 2px 2px 0 var(--dr-black);
         }
 
+        /* Сетка для проектов: теперь 7 кнопок в две строки */
         .projects-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 30px;
+            gap: 20px;
             margin-top: 20px;
         }
 
         .project-link {
             background: var(--btn-bg);
             color: white;
-            padding: 14px 32px;
+            padding: 12px 24px;
             border-radius: 60px;
             font-weight: bold;
             text-decoration: none;
-            font-size: 1.2rem;
+            font-size: 1rem;
             transition: 0.08s linear;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             box-shadow: 4px 4px 0 var(--dr-black);
             border: none;
             font-family: monospace;
             text-transform: uppercase;
+            white-space: nowrap;
         }
 
         .project-link:hover {
@@ -452,8 +454,18 @@
         
         .project-link::after {
             content: "🔍";
-            font-size: 1rem;
+            font-size: 0.9rem;
             opacity: 0.9;
+        }
+
+        /* адаптив: чтобы кнопки не ломались на маленьких экранах */
+        @media (max-width: 680px) {
+            .project-link {
+                white-space: normal;
+                word-break: keep-all;
+                padding: 8px 18px;
+                font-size: 0.85rem;
+            }
         }
 
         .skills-short {
@@ -541,24 +553,24 @@
         <div class="modal-content">
             <div class="modal-icon">⚠️🔪</div>
             <div class="modal-question">
-                вы <span class="highlight-word">ТОЧНО</span><br>хотите посетить сайт<br>с моей итоговой работой?
+                Вы <span class="highlight-word">ТОЧНО</span><br>хотите посетить сайт<br>с моей итоговой работой?
             </div>
             <div class="modal-description">
-                Решение будет окончательным. Надежда или отчаяние ждут впереди...
+                Решение будет окончательным. Надежда или отчаяние...
             </div>
             <form id="pollForm" class="poll-form">
                 <div class="poll-option" onclick="document.getElementById('radioNo').checked=true;">
                     <input type="radio" name="delivery" value="1" id="radioNo">
-                    <label for="radioNo">❌ нет, напугала</label>
+                    <label for="radioNo">❌ нет, я боюсь</label>
                 </div>
                 <div class="poll-option" onclick="document.getElementById('radioYes').checked=true;">
                     <input type="radio" name="delivery" value="2" id="radioYes">
-                    <label for="radioYes">✅ да! я готов(а) к правде!</label>
+                    <label for="radioYes">✅ да!</label>
                 </div>
             </form>
             <div class="modal-buttons">
                 <button id="confirmChoiceBtn" class="modal-btn">ПОДТВЕРДИТЬ ВЫБОР</button>
-                <button id="cancelModalBtn" class="modal-btn secondary">ПОБОЯТЬСЯ</button>
+                <button id="cancelModalBtn" class="modal-btn secondary">УБЕЖАТЬ В СТРАХЕ</button>
             </div>
         </div>
     </div>
@@ -587,17 +599,21 @@
             <div class="frame-block projects-frame">
                 <h2>🔍 МОИ ПРОЕКТЫ</h2>
                 <div class="projects-container">
-                    <a href="https://nrostomentos.github.io/workgoo/" class="project-link" target="_blank" rel="noopener">🎮 Квест-игра</a>
-                    <a href="https://nrostomentos.github.io/anpractic/" class="project-link" target="_blank" rel="noopener">🐾 Мопсы-портфолио</a>
-                    <a href="https://nrostomentos.github.io/tfff/" class="project-link" target="_blank" rel="noopener">✍️ Шрифты & типографика</a>
+                    <a href="https://nrostomentos.github.io/workgoo/" class="project-link" target="_blank" rel="noopener">🎮 Квест</a>
+                    <a href="https://nrostomentos.github.io/anpractic/" class="project-link" target="_blank" rel="noopener">🐾 Мопсы</a>
+                    <a href="https://nrostomentos.github.io/tfff/" class="project-link" target="_blank" rel="noopener">✍️ Шрифты</a>
+                    <a href="https://nrostomentos.github.io/emo/" class="project-link" target="_blank" rel="noopener">😈 кнопочка</a>
+                    <a href="https://nrostomentos.github.io/anpracticn/" class="project-link" target="_blank" rel="noopener">🖱️ Кастомные курсоры</a>
+                    <a href="https://nrostomentos.github.io/startthree/" class="project-link" target="_blank" rel="noopener">🌦️ Погода (демо)</a>
+                    <a href="https://nrostomentos.github.io/startfour/" class="project-link" target="_blank" rel="noopener">🏫 О НАДиП</a>
                 </div>
             </div>
 
             <div class="frame-block skills-frame">
                 <h2>📌 НАВЫКИ</h2>
                 <div class="skills-short">
-                    <span class="skill-badge">HTML5 / Семантика</span>
-                    <span class="skill-badge">CSS3 / Flex/Grid</span>
+                    <span class="skill-badge">HTML / Семантика</span>
+                    <span class="skill-badge">CSS / Flex/Grid</span>
                     <span class="skill-badge">Адаптивная вёрстка</span>
                     <span class="skill-badge">Формы / UI-элементы</span>
                     <span class="skill-badge">Работа с Figma</span>
@@ -605,7 +621,7 @@
                     <span class="skill-badge">JavaScript (базовый)</span>
                     <span class="skill-badge">Дизайн персонажей</span>
                 </div>
-                <p>⭐ SORE WA CHIGAU YO! (Это не так!) — Я докажу это своими работами. Надежда не сдаётся! ⭐</p>
+                <p>⭐ SORE WA CHIGAU YO! — Я докажу это своими работами. Надежда не сдаётся! ⭐</p>
             </div>
 
             <div class="frame-block" style="text-align: center; padding: 32px 20px;">
@@ -615,7 +631,7 @@
                     <a href="#" class="social-btn" id="contactFakeBtn" style="background: var(--dr-black); border: 2px solid var(--border-color);">💬 Контакт</a>
                 </div>
                 <div class="small-note">
-                    ✨ 希望ヶ峰学園 | Академия Надежды и Пик Отчаяния ✨<br>
+                    ✨| Академия Пик Надежды✨<br>
                     итоговая работа | курс НАДиП | Анна Бердникова
                 </div>
             </div>
