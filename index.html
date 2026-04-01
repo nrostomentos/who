@@ -2,8 +2,9 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Danganronpa | Итоговая работа Анны Бердниковой</title>
+    <meta name="description" content="Портфолио Анны Бердниковой: итоговая работа по курсу НАДиП в стиле Danganronpa. Проекты, навыки, инструменты и контакты.">
     <style>
         * {
             margin: 0;
@@ -26,40 +27,45 @@
         [data-theme="light"] {
             --bg-color: var(--dr-white);
             --text-color: var(--dr-black);
-            --card-bg: rgba(255, 255, 255, 0.85);
+            --card-bg: rgba(255, 255, 255, 0.88);
             --border-color: var(--dr-pink);
             --shadow: var(--dr-shadow);
             --btn-bg: var(--dr-pink);
             --btn-hover-bg: #ff1a8c;
             --secondary-text: #4a4a4a;
             --badge-bg: #f0f0f0;
+            --accent-glow: rgba(230, 0, 122, 0.2);
         }
 
         /* Темная тема (Отчаяние / MonoKuma Style) */
         [data-theme="dark"] {
             --bg-color: #0a0a0a;
             --text-color: #e0e0e0;
-            --card-bg: rgba(20, 20, 20, 0.9);
+            --card-bg: rgba(20, 20, 20, 0.92);
             --border-color: var(--dr-red);
             --shadow: rgba(0, 0, 0, 0.6);
             --btn-bg: var(--dr-red);
             --btn-hover-bg: #ff4d4d;
             --secondary-text: #b0b0b0;
             --badge-bg: #1e1e1e;
+            --accent-glow: rgba(181, 46, 46, 0.25);
         }
 
         body {
-            font-family: 'Segoe UI', 'Poppins', 'Impact', 'Arial Black', sans-serif;
+            font-family: 'Segoe UI', 'Poppins', 'Impact', 'Arial Black', system-ui, sans-serif;
             background: var(--bg-color);
             color: var(--text-color);
             min-height: 100vh;
             line-height: 1.5;
             padding: 20px;
-            /* Добавляем легкую текстуру, как в игре */
-            background-image: repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(230, 0, 122, 0.02) 30px, rgba(230, 0, 122, 0.02) 60px);
+            /* Легкая текстура как в игре: полоски и точки */
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(230, 0, 122, 0.02) 30px, rgba(230, 0, 122, 0.02) 60px),
+                radial-gradient(circle at 10% 20%, rgba(0,0,0,0.02) 1px, transparent 1px);
+            background-size: auto, 24px 24px;
         }
 
-        /* Кнопка переключения темы - стилизована под Монокуму */
+        /* Кнопка переключения темы — стиль "Монокума" */
         .theme-toggle {
             position: fixed;
             top: 20px;
@@ -71,23 +77,24 @@
             width: 56px;
             height: 56px;
             cursor: pointer;
-            font-size: 1.8rem;
+            font-size: 1.9rem;
             z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 0 var(--dr-black);
-            transition: all 0.1s linear;
+            box-shadow: 0 5px 0 var(--dr-black);
+            transition: all 0.08s linear;
             font-family: monospace;
+            backdrop-filter: blur(2px);
         }
 
         .theme-toggle:active {
-            transform: translateY(2px);
-            box-shadow: 0 1px 0 var(--dr-black);
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 var(--dr-black);
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
             padding: 10px 0 30px;
         }
@@ -95,13 +102,13 @@
         /* Стиль рамок как в игре: четкие, контрастные, с "комиксными" тенями */
         .frame-block {
             border: 3px solid var(--border-color);
-            border-radius: 24px;
+            border-radius: 28px;
             background: var(--card-bg);
             box-shadow: 8px 8px 0 var(--dr-black);
             padding: 28px 32px;
             margin-bottom: 36px;
-            backdrop-filter: blur(2px);
-            transition: transform 0.2s, box-shadow 0.2s;
+            backdrop-filter: blur(3px);
+            transition: transform 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1), box-shadow 0.2s;
         }
         
         .frame-block:hover {
@@ -113,7 +120,7 @@
         .main-header {
             text-align: center;
             border: 4px solid var(--border-color);
-            border-radius: 48px;
+            border-radius: 60px;
             background: var(--card-bg);
             padding: 50px 20px 40px;
             margin-bottom: 32px;
@@ -122,16 +129,17 @@
             overflow: hidden;
         }
         
-        /* Эффект "крови" или "лепестков" на заголовке (розовые пятна) */
+        /* Эффект "кровавых лепестков" или символа отчаяния */
         .main-header::before {
-            content: "⚠";
-            font-size: 120px;
-            opacity: 0.03;
+            content: "⚠⚡🔪";
+            font-size: 130px;
+            opacity: 0.04;
             position: absolute;
-            bottom: -20px;
+            bottom: -30px;
             right: -20px;
             pointer-events: none;
             font-family: monospace;
+            white-space: pre;
         }
 
         .main-header h1 {
@@ -152,8 +160,8 @@
             color: var(--secondary-text);
             background: rgba(0,0,0,0.05);
             display: inline-block;
-            padding: 8px 24px;
-            border-radius: 40px;
+            padding: 8px 28px;
+            border-radius: 60px;
             backdrop-filter: blur(4px);
             border-left: 3px solid var(--border-color);
             border-right: 3px solid var(--border-color);
@@ -169,14 +177,14 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 16px;
-            margin-top: 20px;
+            margin-top: 16px;
         }
 
         .app-link {
             display: inline-block;
             background: var(--badge-bg);
             border: 2px solid var(--border-color);
-            padding: 8px 20px;
+            padding: 8px 24px;
             border-radius: 60px;
             font-size: 1rem;
             font-weight: 800;
@@ -225,8 +233,10 @@
             font-weight: bold;
             text-decoration: none;
             font-size: 1.2rem;
-            transition: 0.1s linear;
-            display: inline-block;
+            transition: 0.08s linear;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
             box-shadow: 4px 4px 0 var(--dr-black);
             border: none;
             font-family: monospace;
@@ -237,6 +247,12 @@
             background: var(--btn-hover-bg);
             transform: translate(-2px, -2px);
             box-shadow: 6px 6px 0 var(--dr-black);
+        }
+        
+        .project-link::after {
+            content: "🔍";
+            font-size: 1rem;
+            opacity: 0.9;
         }
 
         /* Навыки */
@@ -256,13 +272,26 @@
             font-weight: 600;
             color: var(--text-color);
             box-shadow: 1px 1px 0 var(--dr-black);
+            transition: all 0.1s;
+        }
+        .skill-badge:hover {
+            transform: scale(0.97);
+            border-color: var(--btn-bg);
         }
         .skills-frame p {
             text-align: center;
             margin-top: 24px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             opacity: 0.9;
             font-style: italic;
+            font-weight: 500;
+            background: var(--accent-glow);
+            display: inline-block;
+            width: auto;
+            padding: 8px 18px;
+            border-radius: 40px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         /* Footer ссылки */
@@ -281,7 +310,7 @@
             text-decoration: none;
             font-weight: bold;
             font-size: 1.1rem;
-            transition: 0.1s linear;
+            transition: 0.08s linear;
             box-shadow: 4px 4px 0 var(--dr-black);
             display: inline-flex;
             align-items: center;
@@ -296,9 +325,11 @@
         .small-note {
             text-align: center;
             font-size: 0.8rem;
-            margin-top: 24px;
-            opacity: 0.6;
+            margin-top: 28px;
+            opacity: 0.7;
             font-family: monospace;
+            border-top: 1px dashed var(--border-color);
+            padding-top: 20px;
         }
 
         hr {
@@ -307,15 +338,16 @@
         }
 
         /* Адаптивность */
-        @media (max-width: 680px) {
+        @media (max-width: 720px) {
             .main-header h1 {
                 font-size: 2rem;
             }
             .header-sub {
                 font-size: 0.9rem;
+                padding: 6px 16px;
             }
             .app-link {
-                font-size: 0.8rem;
+                font-size: 0.75rem;
                 padding: 5px 14px;
             }
             .frame-block {
@@ -327,7 +359,7 @@
             .theme-toggle {
                 width: 48px;
                 height: 48px;
-                font-size: 1.4rem;
+                font-size: 1.5rem;
                 top: 12px;
                 right: 12px;
             }
@@ -335,24 +367,33 @@
                 padding: 10px 20px;
                 font-size: 1rem;
             }
+            .projects-frame h2, .skills-frame h2 {
+                font-size: 1.8rem;
+            }
         }
         
-        /* Дополнительный штрих Danganronpa: полоски на кнопках */
-        .project-link, .social-btn, .app-link {
+        /* Доп. анимация как в игре: легкое мерцание для кнопок */
+        @keyframes tinyPulse {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        .project-link, .social-btn {
             position: relative;
-            overflow: hidden;
         }
         
-        .project-link::after {
-            content: "★";
-            margin-left: 8px;
-            font-size: 0.8rem;
-            opacity: 0.7;
+        /* кастомный скролл */
+        ::-webkit-scrollbar {
+            width: 10px;
+            background: var(--bg-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 10px;
         }
     </style>
 </head>
 <body data-theme="light">
-    <button class="theme-toggle" id="themeToggleBtn" aria-label="Punishment Time!">🎲</button>
+    <button class="theme-toggle" id="themeToggleBtn" aria-label="Переключить тему: Надежда / Отчаяние">💖</button>
 
     <div class="container">
         <!-- 1. Главный заголовок в стиле "Классная комната Надежды" -->
@@ -361,26 +402,26 @@
             <div class="header-sub">⚡ 完全に合格しました | Полный курс НАДиП ⚡</div>
         </div>
 
-        <!-- 2. Инструменты (приложения) как "Ультимативные способности" -->
+        <!-- 2. Инструменты (приложения) как "Ультимативные способности" (ссылки на рабочие профили / страницы) -->
         <div class="frame-block apps-section">
             <div class="apps-grid">
-                <a href="#" class="app-link" target="_blank" rel="noopener">UNITY</a>
+                <a href="https://unity.com/ru" class="app-link" target="_blank" rel="noopener">UNITY</a>
                 <a href="https://www.figma.com/files/team/1555152438497769839/project/462519846?fuid=1555152436432346659" class="app-link" target="_blank" rel="noopener">FIGMA</a>
-                <a href="#" class="app-link" target="_blank" rel="noopener">ROBLOX STUDIO</a>
-                <a href="https://nrostomentos.github.io/anpractic/" class="app-link" target="_blank" rel="noopener">GITHUB</a>
-                <a href="#" class="app-link" target="_blank" rel="noopener">HIGHRISE</a>
-                <a href="#" class="app-link" target="_blank" rel="noopener">KRITA</a>
-                <a href="#" class="app-link" target="_blank" rel="noopener">GSITOR</a>
+                <a href="https://www.roblox.com/" class="app-link" target="_blank" rel="noopener">ROBLOX STUDIO</a>
+                <a href="https://nrostomentos.github.io/anpractic/" class="app-link" target="_blank" rel="noopener">GITHUB PAGES</a>
+                <a href="https://highrise.com/" class="app-link" target="_blank" rel="noopener">HIGHRISE</a>
+                <a href="https://krita.org/" class="app-link" target="_blank" rel="noopener">KRITA</a>
+                <a href="https://www.aseprite.org/" class="app-link" target="_blank" rel="noopener">ASEPRITE</a>
             </div>
         </div>
 
-        <!-- 3. Мои проекты — как "Убийственные улики" -->
+        <!-- 3. Мои проекты — как "Убийственные улики" (актуальные живые ссылки) -->
         <div class="frame-block projects-frame">
             <h2>🔍 МОИ ПРОЕКТЫ</h2>
             <div class="projects-container">
-                <a href="https://nrostomentos.github.io/workgoo/" class="project-link" target="_blank" rel="noopener">🎮 Квест</a>
-                <a href="https://nrostomentos.github.io/anpractic/" class="project-link" target="_blank" rel="noopener">🐾 Мопсы</a>
-                <a href="https://nrostomentos.github.io/tfff/" class="project-link" target="_blank" rel="noopener">✍️ Шрифты</a>
+                <a href="https://nrostomentos.github.io/workgoo/" class="project-link" target="_blank" rel="noopener">🎮 Квест-игра</a>
+                <a href="https://nrostomentos.github.io/anpractic/" class="project-link" target="_blank" rel="noopener">🐾 Мопсы-портфолио</a>
+                <a href="https://nrostomentos.github.io/tfff/" class="project-link" target="_blank" rel="noopener">✍️ Шрифты & типографика</a>
             </div>
         </div>
 
@@ -394,8 +435,10 @@
                 <span class="skill-badge">Формы / UI-элементы</span>
                 <span class="skill-badge">Работа с Figma</span>
                 <span class="skill-badge">Git / GitHub</span>
+                <span class="skill-badge">JavaScript (базовый)</span>
+                <span class="skill-badge">Дизайн персонажей</span>
             </div>
-            <p>⭐ SORE WA CHIGAU YO! (Это не так!) — Я докажу это своими работами ⭐</p>
+            <p>⭐ SORE WA CHIGAU YO! (Это не так!) — Я докажу это своими работами. Надежда не сдаётся! ⭐</p>
         </div>
 
         <!-- 5. Ссылки и подвал в стиле "После классного суда" -->
@@ -403,10 +446,11 @@
             <div class="footer-links">
                 <a href="https://github.com/nrostomentos" class="social-btn" target="_blank" rel="noopener">🐙 GitHub</a>
                 <a href="https://t.me/swn_f" class="social-btn" target="_blank" rel="noopener">📱 Telegram</a>
+                <a href="#" class="social-btn" id="contactFakeBtn" style="background: var(--dr-black); border: 2px solid var(--border-color);">💬 Контакт</a>
             </div>
             <div class="small-note">
-                ✨ 希望ヶ峰学園 | Надежда и Отчаяние ✨<br>
-                итоговая работа | курс НАДиП
+                ✨ 希望ヶ峰学園 | Академия Надежды и Пик Отчаяния ✨<br>
+                итоговая работа | курс НАДиП | Анна Бердникова
             </div>
         </div>
     </div>
@@ -421,8 +465,14 @@
                 rootAttr.setAttribute('data-theme', theme);
                 localStorage.setItem('drTheme', theme);
                 if (toggleBtn) {
-                    toggleBtn.textContent = theme === 'dark' ? '🖤' : '💖';
-                    toggleBtn.style.background = theme === 'dark' ? 'var(--dr-red)' : 'var(--dr-pink)';
+                    // Меняем иконку и стиль кнопки для атмосферы
+                    if (theme === 'dark') {
+                        toggleBtn.textContent = '🖤';
+                        toggleBtn.style.background = 'var(--dr-red)';
+                    } else {
+                        toggleBtn.textContent = '💖';
+                        toggleBtn.style.background = 'var(--dr-pink)';
+                    }
                 }
             }
 
@@ -430,19 +480,51 @@
                 const current = rootAttr.getAttribute('data-theme');
                 const newTheme = current === 'dark' ? 'light' : 'dark';
                 setTheme(newTheme);
+                // легкий эффект "наказания" - вибрация кнопки (игровая отсылка)
+                if (toggleBtn) {
+                    toggleBtn.style.transform = 'scale(0.95)';
+                    setTimeout(() => { if(toggleBtn) toggleBtn.style.transform = ''; }, 120);
+                }
             }
 
             const savedTheme = localStorage.getItem('drTheme');
             if (savedTheme && (savedTheme === 'dark' || savedTheme === 'light')) {
                 setTheme(savedTheme);
             } else {
-                // По умолчанию ставим светлую тему Danganronpa (розовый на белом) — стиль Надежды
+                // По умолчанию светлая тема Надежды
                 setTheme('light');
             }
 
             if (toggleBtn) {
                 toggleBtn.addEventListener('click', toggleTheme);
             }
+
+            // Эффект для "контактной" кнопки: игровое сообщение (Danganronpa vibe)
+            const fakeContact = document.getElementById('contactFakeBtn');
+            if (fakeContact) {
+                fakeContact.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    alert("📞『 УЛЬТИМАТИВНЫЙ КОНТАКТ 』\nСвяжись со мной через Telegram или GitHub!\nНадежда всегда побеждает отчаяние ✨");
+                });
+            }
+
+            // Добавим дополнительный эффект при клике на любой проект (веселый звук в консоль для вайба)
+            const allProjectLinks = document.querySelectorAll('.project-link');
+            allProjectLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    console.log('%c🔪 Классное судебное разбирательство: переход к улике → ' + link.href, 'color: #e6007a; font-weight: bold;');
+                });
+            });
+
+            // Эффект для кнопок социальных сетей (логируем, но без спама)
+            const socialBtns = document.querySelectorAll('.social-btn');
+            socialBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    if(btn.id !== 'contactFakeBtn') {
+                        console.log('📡 Открыт портал связи: ' + btn.textContent.trim());
+                    }
+                });
+            });
         })();
     </script>
 </body>
