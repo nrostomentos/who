@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Danganronpa | Итоговая работа Анны Бердниковой</title>
-    <meta name="description" content="Портфолио Анны Бердниковой: итоговая работа по курсу НАДиП в стиле Danganronpa. Проекты, навыки, инструменты и контакты.">
     <style>
         * {
             margin: 0;
@@ -15,15 +14,15 @@
 
         /* --- ЦВЕТА DANGANRONPA --- */
         :root {
-            --dr-pink: #e6007a;      /* Культовый розовый Danganronpa */
-            --dr-red: #b52e2e;       /* Темно-красный для акцентов */
-            --dr-black: #1a1a1a;     /* Глубокий черный */
-            --dr-white: #f8f8f8;     /* Белоснежный фон */
-            --dr-gray: #2e2e2e;      /* Темно-серый для текста в светлой теме */
+            --dr-pink: #e6007a;
+            --dr-red: #b52e2e;
+            --dr-black: #1a1a1a;
+            --dr-white: #f8f8f8;
+            --dr-gray: #2e2e2e;
             --dr-shadow: rgba(0, 0, 0, 0.2);
         }
 
-        /* Светлая тема (Надежда / Обычная школа) */
+        /* Светлая тема (Надежда) */
         [data-theme="light"] {
             --bg-color: var(--dr-white);
             --text-color: var(--dr-black);
@@ -35,9 +34,10 @@
             --secondary-text: #4a4a4a;
             --badge-bg: #f0f0f0;
             --accent-glow: rgba(230, 0, 122, 0.2);
+            --modal-overlay: rgba(0, 0, 0, 0.75);
         }
 
-        /* Темная тема (Отчаяние / MonoKuma Style) */
+        /* Темная тема (Отчаяние) */
         [data-theme="dark"] {
             --bg-color: #0a0a0a;
             --text-color: #e0e0e0;
@@ -49,6 +49,7 @@
             --secondary-text: #b0b0b0;
             --badge-bg: #1e1e1e;
             --accent-glow: rgba(181, 46, 46, 0.25);
+            --modal-overlay: rgba(0, 0, 0, 0.85);
         }
 
         body {
@@ -58,11 +59,204 @@
             min-height: 100vh;
             line-height: 1.5;
             padding: 20px;
-            /* Легкая текстура как в игре: полоски и точки */
             background-image: 
                 repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(230, 0, 122, 0.02) 30px, rgba(230, 0, 122, 0.02) 60px),
                 radial-gradient(circle at 10% 20%, rgba(0,0,0,0.02) 1px, transparent 1px);
             background-size: auto, 24px 24px;
+        }
+
+        /* БЛОКИРОВКА СКРОЛЛА, ПОКА МОДАЛКА АКТИВНА */
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        /* МОДАЛЬНОЕ ОКНО В СТИЛЕ DANGANRONPA */
+        .decision-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--modal-overlay);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-content {
+            max-width: 550px;
+            width: 90%;
+            background: var(--card-bg);
+            border: 4px solid var(--border-color);
+            border-radius: 48px;
+            padding: 32px 28px 40px;
+            box-shadow: 16px 16px 0 var(--dr-black);
+            text-align: center;
+            animation: modalPop 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
+        }
+
+        @keyframes modalPop {
+            0% {
+                opacity: 0;
+                transform: scale(0.92) translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .modal-icon {
+            font-size: 4rem;
+            margin-bottom: 16px;
+            filter: drop-shadow(2px 2px 0 var(--dr-black));
+        }
+
+        .modal-question {
+            font-size: 1.8rem;
+            font-weight: 900;
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            text-transform: uppercase;
+            color: var(--border-color);
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 0 var(--dr-black);
+        }
+
+        .highlight-word {
+            font-size: 2rem;
+            display: inline-block;
+            background: linear-gradient(135deg, #ff3366, #ff00aa);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: none;
+            font-weight: 900;
+            letter-spacing: 2px;
+            font-family: 'Impact', 'Arial Black', 'Segoe UI Black', sans-serif;
+            animation: pulseGlow 1.2s infinite alternate;
+        }
+
+        /* Темная тема тоже сохраняет яркое выделение */
+        [data-theme="dark"] .highlight-word {
+            background: linear-gradient(135deg, #ff6666, #ff3366);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 8px rgba(255, 51, 102, 0.5);
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                text-shadow: 0 0 0px rgba(230, 0, 122, 0.3);
+                opacity: 0.95;
+            }
+            100% {
+                text-shadow: 0 0 12px rgba(230, 0, 122, 0.8);
+                opacity: 1;
+            }
+        }
+
+        .modal-description {
+            font-size: 1rem;
+            margin-bottom: 28px;
+            color: var(--secondary-text);
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 16px;
+        }
+
+        /* Стилизация формы-опроса как в Danganronpa */
+        .poll-form {
+            text-align: left;
+            background: var(--badge-bg);
+            border-radius: 32px;
+            padding: 20px 24px;
+            margin: 12px 0 24px;
+            border: 1px solid var(--border-color);
+        }
+
+        .poll-option {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 16px;
+            margin: 8px 0;
+            background: var(--card-bg);
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .poll-option:hover {
+            border-color: var(--border-color);
+            transform: translateX(6px);
+            background: var(--accent-glow);
+        }
+
+        .poll-option input {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--border-color);
+            cursor: pointer;
+        }
+
+        .poll-option label {
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            flex: 1;
+            font-family: monospace;
+            letter-spacing: 0.5px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 12px;
+        }
+
+        .modal-btn {
+            padding: 12px 28px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            font-family: monospace;
+            text-transform: uppercase;
+            transition: 0.08s linear;
+            box-shadow: 3px 3px 0 var(--dr-black);
+            background: var(--btn-bg);
+            color: white;
+        }
+
+        .modal-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 1px 1px 0 var(--dr-black);
+        }
+
+        .modal-btn.secondary {
+            background: var(--badge-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            box-shadow: 2px 2px 0 var(--dr-black);
+        }
+
+        /* ОСНОВНОЙ КОНТЕНТ (изначально скрыт) */
+        #mainContent {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        #mainContent.visible {
+            display: block;
+            opacity: 1;
         }
 
         /* Кнопка переключения темы — стиль "Монокума" */
@@ -99,7 +293,7 @@
             padding: 10px 0 30px;
         }
 
-        /* Стиль рамок как в игре: четкие, контрастные, с "комиксными" тенями */
+        /* Стиль рамок */
         .frame-block {
             border: 3px solid var(--border-color);
             border-radius: 28px;
@@ -116,7 +310,6 @@
             box-shadow: 12px 12px 0 var(--dr-black);
         }
 
-        /* ЗАГОЛОВОК: Стиль "Надежда против Отчаяния" */
         .main-header {
             text-align: center;
             border: 4px solid var(--border-color);
@@ -129,7 +322,6 @@
             overflow: hidden;
         }
         
-        /* Эффект "кровавых лепестков" или символа отчаяния */
         .main-header::before {
             content: "⚠⚡🔪";
             font-size: 130px;
@@ -139,7 +331,6 @@
             right: -20px;
             pointer-events: none;
             font-family: monospace;
-            white-space: pre;
         }
 
         .main-header h1 {
@@ -165,11 +356,6 @@
             backdrop-filter: blur(4px);
             border-left: 3px solid var(--border-color);
             border-right: 3px solid var(--border-color);
-        }
-
-        /* Секция с инструментами (приложения) */
-        .apps-section {
-            text-align: center;
         }
 
         .apps-grid {
@@ -205,7 +391,6 @@
             border-color: var(--dr-black);
         }
 
-        /* Проекты */
         .projects-frame h2, .skills-frame h2 {
             text-align: center;
             font-size: 2.2rem;
@@ -255,7 +440,6 @@
             opacity: 0.9;
         }
 
-        /* Навыки */
         .skills-short {
             display: flex;
             flex-wrap: wrap;
@@ -272,11 +456,6 @@
             font-weight: 600;
             color: var(--text-color);
             box-shadow: 1px 1px 0 var(--dr-black);
-            transition: all 0.1s;
-        }
-        .skill-badge:hover {
-            transform: scale(0.97);
-            border-color: var(--btn-bg);
         }
         .skills-frame p {
             text-align: center;
@@ -284,7 +463,6 @@
             font-size: 0.95rem;
             opacity: 0.9;
             font-style: italic;
-            font-weight: 500;
             background: var(--accent-glow);
             display: inline-block;
             width: auto;
@@ -294,7 +472,6 @@
             margin-right: auto;
         }
 
-        /* Footer ссылки */
         .footer-links {
             display: flex;
             justify-content: center;
@@ -332,174 +509,215 @@
             padding-top: 20px;
         }
 
-        hr {
-            border-color: var(--border-color);
-            margin: 6px 0;
-        }
-
-        /* Адаптивность */
         @media (max-width: 720px) {
-            .main-header h1 {
-                font-size: 2rem;
-            }
-            .header-sub {
-                font-size: 0.9rem;
-                padding: 6px 16px;
-            }
-            .app-link {
-                font-size: 0.75rem;
-                padding: 5px 14px;
-            }
-            .frame-block {
-                padding: 20px 16px;
-            }
-            .container {
-                padding: 0 8px;
-            }
-            .theme-toggle {
-                width: 48px;
-                height: 48px;
-                font-size: 1.5rem;
-                top: 12px;
-                right: 12px;
-            }
-            .project-link {
-                padding: 10px 20px;
-                font-size: 1rem;
-            }
-            .projects-frame h2, .skills-frame h2 {
-                font-size: 1.8rem;
-            }
-        }
-        
-        /* Доп. анимация как в игре: легкое мерцание для кнопок */
-        @keyframes tinyPulse {
-            0% { opacity: 0.7; }
-            100% { opacity: 1; }
-        }
-        .project-link, .social-btn {
-            position: relative;
-        }
-        
-        /* кастомный скролл */
-        ::-webkit-scrollbar {
-            width: 10px;
-            background: var(--bg-color);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--border-color);
-            border-radius: 10px;
+            .main-header h1 { font-size: 2rem; }
+            .header-sub { font-size: 0.9rem; }
+            .frame-block { padding: 20px 16px; }
+            .theme-toggle { width: 48px; height: 48px; font-size: 1.5rem; }
+            .modal-question { font-size: 1.4rem; }
+            .highlight-word { font-size: 1.6rem; }
         }
     </style>
 </head>
-<body data-theme="light">
-    <button class="theme-toggle" id="themeToggleBtn" aria-label="Переключить тему: Надежда / Отчаяние">💖</button>
-
-    <div class="container">
-        <!-- 1. Главный заголовок в стиле "Классная комната Надежды" -->
-        <div class="main-header">
-            <h1>ИТОГОВАЯ РАБОТА<br>БЕРДНИКОВОЙ АННЫ</h1>
-            <div class="header-sub">⚡ 完全に合格しました | Полный курс НАДиП ⚡</div>
-        </div>
-
-        <!-- 2. Инструменты (приложения) как "Ультимативные способности" (ссылки на рабочие профили / страницы) -->
-        <div class="frame-block apps-section">
-            <div class="apps-grid">
-                <a href="https://unity.com/ru" class="app-link" target="_blank" rel="noopener">UNITY</a>
-                <a href="https://www.figma.com/files/team/1555152438497769839/project/462519846?fuid=1555152436432346659" class="app-link" target="_blank" rel="noopener">FIGMA</a>
-                <a href="https://www.roblox.com/" class="app-link" target="_blank" rel="noopener">ROBLOX STUDIO</a>
-                <a href="https://nrostomentos.github.io/anpractic/" class="app-link" target="_blank" rel="noopener">GITHUB PAGES</a>
-                <a href="https://highrise.com/" class="app-link" target="_blank" rel="noopener">HIGHRISE</a>
-                <a href="https://krita.org/" class="app-link" target="_blank" rel="noopener">KRITA</a>
-                <a href="https://www.aseprite.org/" class="app-link" target="_blank" rel="noopener">ASEPRITE</a>
+<body>
+    <!-- МОДАЛЬНОЕ ОКНО С ОПРОСОМ -->
+    <div id="decisionModal" class="decision-modal">
+        <div class="modal-content">
+            <div class="modal-icon">⚠️🔪</div>
+            <div class="modal-question">
+                вы <span class="highlight-word">ТОЧНО</span><br>хотите посетить сайт<br>с моей итоговой работой?
+            </div>
+            <div class="modal-description">
+                Решение будет окончательным. Надежда или отчаяние ждут впереди...
+            </div>
+            <form id="pollForm" class="poll-form">
+                <div class="poll-option" onclick="document.getElementById('radioNo').checked=true;">
+                    <input type="radio" name="delivery" value="1" id="radioNo">
+                    <label for="radioNo">❌ нет, напугала</label>
+                </div>
+                <div class="poll-option" onclick="document.getElementById('radioYes').checked=true;">
+                    <input type="radio" name="delivery" value="2" id="radioYes">
+                    <label for="radioYes">✅ да! я готов(а) к правде!</label>
+                </div>
+            </form>
+            <div class="modal-buttons">
+                <button id="confirmChoiceBtn" class="modal-btn">ПОДТВЕРДИТЬ ВЫБОР</button>
+                <button id="cancelModalBtn" class="modal-btn secondary">ПОБОЯТЬСЯ</button>
             </div>
         </div>
+    </div>
 
-        <!-- 3. Мои проекты — как "Убийственные улики" (актуальные живые ссылки) -->
-        <div class="frame-block projects-frame">
-            <h2>🔍 МОИ ПРОЕКТЫ</h2>
-            <div class="projects-container">
-                <a href="https://nrostomentos.github.io/workgoo/" class="project-link" target="_blank" rel="noopener">🎮 Квест-игра</a>
-                <a href="https://nrostomentos.github.io/anpractic/" class="project-link" target="_blank" rel="noopener">🐾 Мопсы-портфолио</a>
-                <a href="https://nrostomentos.github.io/tfff/" class="project-link" target="_blank" rel="noopener">✍️ Шрифты & типографика</a>
+    <!-- ОСНОВНОЙ КОНТЕНТ (изначально скрыт) -->
+    <div id="mainContent">
+        <button class="theme-toggle" id="themeToggleBtn" aria-label="Переключить тему: Надежда / Отчаяние">💖</button>
+        <div class="container">
+            <div class="main-header">
+                <h1>ИТОГОВАЯ РАБОТА<br>БЕРДНИКОВОЙ АННЫ</h1>
+                <div class="header-sub">⚡ 完全に合格しました | Полный курс НАДиП ⚡</div>
             </div>
-        </div>
 
-        <!-- 4. Навыки — как "Фразы из классного суда" -->
-        <div class="frame-block skills-frame">
-            <h2>📌 НАВЫКИ</h2>
-            <div class="skills-short">
-                <span class="skill-badge">HTML5 / Семантика</span>
-                <span class="skill-badge">CSS3 / Flex/Grid</span>
-                <span class="skill-badge">Адаптивная вёрстка</span>
-                <span class="skill-badge">Формы / UI-элементы</span>
-                <span class="skill-badge">Работа с Figma</span>
-                <span class="skill-badge">Git / GitHub</span>
-                <span class="skill-badge">JavaScript (базовый)</span>
-                <span class="skill-badge">Дизайн персонажей</span>
+            <div class="frame-block apps-section">
+                <div class="apps-grid">
+                    <a href="https://unity.com/ru" class="app-link" target="_blank" rel="noopener">UNITY</a>
+                    <a href="https://www.figma.com/files/team/1555152438497769839/project/462519846?fuid=1555152436432346659" class="app-link" target="_blank" rel="noopener">FIGMA</a>
+                    <a href="https://www.roblox.com/" class="app-link" target="_blank" rel="noopener">ROBLOX STUDIO</a>
+                    <a href="https://nrostomentos.github.io/anpractic/" class="app-link" target="_blank" rel="noopener">GITHUB PAGES</a>
+                    <a href="https://highrise.com/" class="app-link" target="_blank" rel="noopener">HIGHRISE</a>
+                    <a href="https://krita.org/" class="app-link" target="_blank" rel="noopener">KRITA</a>
+                    <a href="https://www.aseprite.org/" class="app-link" target="_blank" rel="noopener">ASEPRITE</a>
+                </div>
             </div>
-            <p>⭐ SORE WA CHIGAU YO! (Это не так!) — Я докажу это своими работами. Надежда не сдаётся! ⭐</p>
-        </div>
 
-        <!-- 5. Ссылки и подвал в стиле "После классного суда" -->
-        <div class="frame-block" style="text-align: center; padding: 32px 20px;">
-            <div class="footer-links">
-                <a href="https://github.com/nrostomentos" class="social-btn" target="_blank" rel="noopener">🐙 GitHub</a>
-                <a href="https://t.me/swn_f" class="social-btn" target="_blank" rel="noopener">📱 Telegram</a>
-                <a href="#" class="social-btn" id="contactFakeBtn" style="background: var(--dr-black); border: 2px solid var(--border-color);">💬 Контакт</a>
+            <div class="frame-block projects-frame">
+                <h2>🔍 МОИ ПРОЕКТЫ</h2>
+                <div class="projects-container">
+                    <a href="https://nrostomentos.github.io/workgoo/" class="project-link" target="_blank" rel="noopener">🎮 Квест-игра</a>
+                    <a href="https://nrostomentos.github.io/anpractic/" class="project-link" target="_blank" rel="noopener">🐾 Мопсы-портфолио</a>
+                    <a href="https://nrostomentos.github.io/tfff/" class="project-link" target="_blank" rel="noopener">✍️ Шрифты & типографика</a>
+                </div>
             </div>
-            <div class="small-note">
-                ✨ 希望ヶ峰学園 | Академия Надежды и Пик Отчаяния ✨<br>
-                итоговая работа | курс НАДиП | Анна Бердникова
+
+            <div class="frame-block skills-frame">
+                <h2>📌 НАВЫКИ</h2>
+                <div class="skills-short">
+                    <span class="skill-badge">HTML5 / Семантика</span>
+                    <span class="skill-badge">CSS3 / Flex/Grid</span>
+                    <span class="skill-badge">Адаптивная вёрстка</span>
+                    <span class="skill-badge">Формы / UI-элементы</span>
+                    <span class="skill-badge">Работа с Figma</span>
+                    <span class="skill-badge">Git / GitHub</span>
+                    <span class="skill-badge">JavaScript (базовый)</span>
+                    <span class="skill-badge">Дизайн персонажей</span>
+                </div>
+                <p>⭐ SORE WA CHIGAU YO! (Это не так!) — Я докажу это своими работами. Надежда не сдаётся! ⭐</p>
+            </div>
+
+            <div class="frame-block" style="text-align: center; padding: 32px 20px;">
+                <div class="footer-links">
+                    <a href="https://github.com/nrostomentos" class="social-btn" target="_blank" rel="noopener">🐙 GitHub</a>
+                    <a href="https://t.me/swn_f" class="social-btn" target="_blank" rel="noopener">📱 Telegram</a>
+                    <a href="#" class="social-btn" id="contactFakeBtn" style="background: var(--dr-black); border: 2px solid var(--border-color);">💬 Контакт</a>
+                </div>
+                <div class="small-note">
+                    ✨ 希望ヶ峰学園 | Академия Надежды и Пик Отчаяния ✨<br>
+                    итоговая работа | курс НАДиП | Анна Бердникова
+                </div>
             </div>
         </div>
     </div>
 
     <script>
         (function() {
-            // Каноничная смена темы: Светлая (Надежда/Розовая) и Тёмная (Отчаяние/Красная)
-            const toggleBtn = document.getElementById('themeToggleBtn');
-            const rootAttr = document.body;
+            // DOM элементы
+            const modal = document.getElementById('decisionModal');
+            const mainContent = document.getElementById('mainContent');
+            const confirmBtn = document.getElementById('confirmChoiceBtn');
+            const cancelBtn = document.getElementById('cancelModalBtn');
+            const radioYes = document.getElementById('radioYes');
+            const radioNo = document.getElementById('radioNo');
 
-            function setTheme(theme) {
-                rootAttr.setAttribute('data-theme', theme);
-                localStorage.setItem('drTheme', theme);
-                if (toggleBtn) {
-                    // Меняем иконку и стиль кнопки для атмосферы
-                    if (theme === 'dark') {
-                        toggleBtn.textContent = '🖤';
-                        toggleBtn.style.background = 'var(--dr-red)';
-                    } else {
-                        toggleBtn.textContent = '💖';
-                        toggleBtn.style.background = 'var(--dr-pink)';
+            // Функция показа основного контента
+            function showMainSite() {
+                // Плавно скрываем модалку
+                if (modal) {
+                    modal.style.opacity = '0';
+                    setTimeout(() => {
+                        modal.style.display = 'none';
+                        document.body.classList.remove('modal-open');
+                        mainContent.classList.add('visible');
+                        // Небольшой эффект появления
+                        mainContent.style.opacity = '1';
+                    }, 250);
+                } else {
+                    mainContent.classList.add('visible');
+                    document.body.classList.remove('modal-open');
+                }
+            }
+
+            // Функция обработки выбора (без выбранного радиобаттона - предупреждение)
+            function processChoice() {
+                const selected = document.querySelector('input[name="delivery"]:checked');
+                if (!selected) {
+                    alert("【ПУНТИШМЕНТ ТАЙМ】 Вы не выбрали вариант! Ответь на вопрос, Ультимативный ученик!");
+                    return false;
+                }
+                const value = selected.value;
+                if (value === "2") {
+                    // ДА! Показываем сайт
+                    showMainSite();
+                    return true;
+                } else if (value === "1") {
+                    // НЕТ, напугала — выходим с эффектом "отчаяния"
+                    alert("💀 Отчаяние победило... Но надежда всегда возвращается. Обнови страницу, если передумаешь! 💀");
+                    // Заблокируем возможность открыть сайт, но оставляем модалку, чтобы можно было перезагрузить страницу и выбрать "ДА"
+                    // Однако чтобы пользователь мог передумать — предложим перезагрузку.
+                    if(confirm("Нажми ОК, чтобы перезагрузить страницу и дать надежде новый шанс. Или отмена, чтобы остаться.")) {
+                        location.reload();
                     }
+                    return false;
                 }
+                return false;
             }
 
-            function toggleTheme() {
-                const current = rootAttr.getAttribute('data-theme');
-                const newTheme = current === 'dark' ? 'light' : 'dark';
-                setTheme(newTheme);
-                // легкий эффект "наказания" - вибрация кнопки (игровая отсылка)
-                if (toggleBtn) {
-                    toggleBtn.style.transform = 'scale(0.95)';
-                    setTimeout(() => { if(toggleBtn) toggleBtn.style.transform = ''; }, 120);
-                }
+            // Кнопка подтверждения
+            if (confirmBtn) {
+                confirmBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    processChoice();
+                });
             }
 
+            // Кнопка "ПОБОЯТЬСЯ" = аналог "нет, напугала"
+            if (cancelBtn) {
+                cancelBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    // Если нет выбранного, но нажали "побояться" — выбираем автоматически "нет"?
+                    if (!document.querySelector('input[name="delivery"]:checked')) {
+                        if(radioNo) radioNo.checked = true;
+                    }
+                    // затем имитируем выбор "нет"
+                    const noRadio = document.getElementById('radioNo');
+                    if(noRadio) noRadio.checked = true;
+                    processChoice();
+                });
+            }
+
+            // Блокировка скролла пока модалка активна
+            document.body.classList.add('modal-open');
+            
+            // Инициализация темы (но сайт не виден, но тема потом применится)
+            function setTheme(theme) {
+                document.body.setAttribute('data-theme', theme);
+                localStorage.setItem('drTheme', theme);
+                const toggle = document.getElementById('themeToggleBtn');
+                if (toggle) {
+                    toggle.textContent = theme === 'dark' ? '🖤' : '💖';
+                    toggle.style.background = theme === 'dark' ? 'var(--dr-red)' : 'var(--dr-pink)';
+                }
+            }
+            
             const savedTheme = localStorage.getItem('drTheme');
             if (savedTheme && (savedTheme === 'dark' || savedTheme === 'light')) {
                 setTheme(savedTheme);
             } else {
-                // По умолчанию светлая тема Надежды
                 setTheme('light');
             }
-
-            if (toggleBtn) {
-                toggleBtn.addEventListener('click', toggleTheme);
+            
+            // После показа основного контента подключаем тогглер темы (если он уже существует)
+            const themeToggle = document.getElementById('themeToggleBtn');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', () => {
+                    const current = document.body.getAttribute('data-theme');
+                    const newTheme = current === 'dark' ? 'light' : 'dark';
+                    setTheme(newTheme);
+                    if (themeToggle) {
+                        themeToggle.style.transform = 'scale(0.95)';
+                        setTimeout(() => { if(themeToggle) themeToggle.style.transform = ''; }, 120);
+                    }
+                });
             }
 
-            // Эффект для "контактной" кнопки: игровое сообщение (Danganronpa vibe)
+            // Контактная кнопка
             const fakeContact = document.getElementById('contactFakeBtn');
             if (fakeContact) {
                 fakeContact.addEventListener('click', (e) => {
@@ -508,23 +726,15 @@
                 });
             }
 
-            // Добавим дополнительный эффект при клике на любой проект (веселый звук в консоль для вайба)
-            const allProjectLinks = document.querySelectorAll('.project-link');
-            allProjectLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    console.log('%c🔪 Классное судебное разбирательство: переход к улике → ' + link.href, 'color: #e6007a; font-weight: bold;');
+            // Логи для отладки
+            const allProjectLinks = document.querySelectorAll('#mainContent .project-link');
+            if (allProjectLinks.length) {
+                allProjectLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        console.log('%c🔪 Классное судебное разбирательство: переход к улике → ' + link.href, 'color: #e6007a; font-weight: bold;');
+                    });
                 });
-            });
-
-            // Эффект для кнопок социальных сетей (логируем, но без спама)
-            const socialBtns = document.querySelectorAll('.social-btn');
-            socialBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    if(btn.id !== 'contactFakeBtn') {
-                        console.log('📡 Открыт портал связи: ' + btn.textContent.trim());
-                    }
-                });
-            });
+            }
         })();
     </script>
 </body>
